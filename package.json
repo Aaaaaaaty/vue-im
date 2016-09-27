@@ -10,8 +10,9 @@
     "test": ""
   },
   "dependencies": {
+    "babel-runtime": "^6.0.0",
     "vue": "^1.0.21",
-    "babel-runtime": "^6.0.0"
+    "vuex": "^1.0.0-rc.2"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
