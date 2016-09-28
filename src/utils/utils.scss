@@ -1,0 +1,30 @@
+input,textarea:-webkit-autofill {  
+   -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 1) inset;  
+}
+input,button,select,textarea{outline:none}  
+// color
+$black: #4a4a4a;
+
+$gray: #9b9b9b;
+$gray-light: #ccc;
+$gray-bg: #f7f7f7;
+$gray-field: #e4e4e4;
+$gray-holder: rgba(123, 135, 146, 1);
+$green: #0AA082;
+$green-light: #96BEB4;
+
+$red: #F05F50;
+$red-dark: $red;
+$red-fade: #FF966B;
+$red-fade-light: $red-fade;
+
+$white: #fff;
+$white-bg: #f9f9f9;
+
+$blue: rgba(0, 175, 244, 1);
+$blue-line: rgba(232, 239, 248, 1);
+$blue-button-out: rgba(173, 217, 234, 1);
+$blue-button-in: rgba(0, 124, 182, 1);
+$weixin: #91e231;
+$alipay: #4a90e2;
+$simulate: #ff966b;

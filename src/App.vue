@@ -1,23 +1,32 @@
 <template>
   <div>
-    <Hello></Hello>
-    <How></How>
+    <div class="app-logo">
+      <img src="./public/img/logo.jpeg" alt="">
+    </div>
+    <loginform></loginform>
+    <loginbutton></loginbutton>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
-import How from './components/How'
-import store from './vuex/store'
+import loginform from './components/loginform'
+import loginbutton from './components/loginbutton'
+// import store from './vuex/store'
 
 export default {
   components: {
-    Hello,
-    How
+    loginform,
+    loginbutton
   },
-  store
+  // store
 }
 </script>
-
-<style>
+<style lang="scss">
+  .app-logo {
+    display: block;
+    width: 148px;
+    margin: 0 auto;
+    margin-top: 60px;
+    margin-bottom: 20px;
+  }
 </style>
