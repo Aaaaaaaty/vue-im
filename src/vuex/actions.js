@@ -1,6 +1,21 @@
-// action 会收到 store 作为它的第一个参数
-// 既然我们只对事件的分发（dispatch 对象）感兴趣。（state 也可以作为可选项放入）
-// 我们可以利用 ES6 的解构（destructuring）功能来简化对参数的导入
-export const incrementCounter = function ({ dispatch, state }) {
-  dispatch('INCREMENT', 1)
+
+import superagent from 'superagent'
+import setting from '../settings'
+const server = setting.server
+export const userLogin = function ({ dispatch, state }, user) {
+  //第一个参数为store dispatch为store解构得来
+  //可以发送http请求后再dispatch分发事件
+
+  superagent.post(server + '/login')
+    .send({
+        user: user
+    })
+    .set('Accept', 'application/json')
+    .end(function(err, res) {
+        const obj = res
+        if(obj.status == 'OK') {
+          console.log(obj)
+        }
+    })
+  dispatch('login', user)
 }

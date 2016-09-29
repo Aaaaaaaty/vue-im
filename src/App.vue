@@ -1,32 +1,21 @@
 <template>
-  <div>
-    <div class="app-logo">
-      <img src="./public/img/logo.jpeg" alt="">
-    </div>
+  <div id="app">
     <loginform></loginform>
-    <loginbutton></loginbutton>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import loginform from './components/loginform'
-import loginbutton from './components/loginbutton'
-// import store from './vuex/store'
+import store from './vuex/store'
 
 export default {
   components: {
     loginform,
-    loginbutton
   },
-  // store
+  store
 }
 </script>
 <style lang="scss">
-  .app-logo {
-    display: block;
-    width: 148px;
-    margin: 0 auto;
-    margin-top: 60px;
-    margin-bottom: 20px;
-  }
+  
 </style>
