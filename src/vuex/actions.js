@@ -9,13 +9,12 @@ export const userLogin = function ({ dispatch, state }, user) {
     .send(user)
     .set('Accept', 'application/json')
     .end(function(err, res) {
+      if(err) {
+        console.log(err)
+      } else {
         const obj = res.body
-        if(obj.status == 'OK') {
-          console.log(obj.data)
-          dispatch('login', obj.data)
-        } else {
-          console.log(obj.data)
-        }
+        dispatch('login', obj.status)
+      }
     })
   // dispatch('login', user)
 }

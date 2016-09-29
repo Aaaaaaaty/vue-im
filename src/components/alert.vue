@@ -1,29 +1,18 @@
 <template>
-  <div>
-    <div class="app-logo">
-      <img src="../public/img/logo.jpeg" alt="">
-    </div>
-    <div class="input-content">
-      <input v-model="user" class="user-input" type="text"  placeholder="用户名">
-      <input v-model="psd"  class="user-input" type="password" placeholder="密码">
-    </div>
-    <div class="login-content">
-      <a  class="login"
-          @click='login'>
-        登录
-      </a>
-    </div>
+  <div v-if="{{isLogin}}">
+    123
   </div>
 </template>
 <script>
 import { userLogin } from '../vuex/actions'
-import { isLogin } from '../vuex/getters'
+import { login } from '../vuex/getters'
 import vuex from 'vuex'
 export default {
   data: function(){
     return {
       user: '',
-      psd: ''
+      psd: '',
+      isLogin: true
     }
   },
   methods: {
@@ -32,17 +21,17 @@ export default {
         username: this.user,
         password: this.psd
       }
-      // this.userLogin(user)
-
-      this.$http.post('http://localhost:3000/api/login', user).then((res) => {
-        var result = res.body
-        if(result.status === 'OK') {
-          this.$router.go('/user')
-        } else {
-          alert(result.msg)
-        }
-      })
+      this.userLogin(user)
+    }
+  },
+  vuex: {
+    actions: {
+      userLogin: userLogin
     },
+    getters: {
+      isLogin: login.isLogin,
+      noLoginTitle: login.noLoginTitle
+    }
   }
 }
 </script>

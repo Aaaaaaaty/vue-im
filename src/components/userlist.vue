@@ -1,15 +1,10 @@
 <template>
-  <h1>Hello App!{{counterValue}}</h1>
+  <h1>userlist</h1>
 </template>
 
 <script>
-  import { getCount } from '../vuex/getters'
   export default {
-    vuex: {
-      getters: {
-        counterValue: getCount
-      }
-    }
+  
   }
 </script>
 

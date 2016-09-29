@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <loginform></loginform>
     <router-view></router-view>
   </div>
 </template>
