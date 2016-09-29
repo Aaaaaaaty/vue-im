@@ -10,6 +10,10 @@ const state = {
 const mutations = {
   login (state, amount) {
     state.count = state.count + amount
+    console.log(amount.user)
+    if(amount) {
+    	alert(amount.user.username+',Welcome!!')
+    }
   }
 }
 
