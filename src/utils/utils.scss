@@ -18,6 +18,7 @@ input,button,select,textarea{outline:none}
 }
 
 
+
 // color
 $black: #4a4a4a;
 
@@ -45,3 +46,14 @@ $blue-icon: #56abe4;
 $weixin: #91e231;
 $alipay: #4a90e2;
 $simulate: #ff966b;
+
+
+#nav {
+    background-color:$gray-bg;
+    height: 50px;
+    line-height: 50px;
+    color: $gray-holder;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+  }

@@ -1,5 +1,6 @@
 <template>
-  <h1>userlist</h1>
+  <div id="nav">通讯录</div>
+  <h1>account</h1>
 </template>
 
 <script>
@@ -9,6 +10,6 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+<style lang="scss">
+  @import '../utils/utils.scss';
 </style>

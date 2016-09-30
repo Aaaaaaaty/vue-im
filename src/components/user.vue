@@ -1,16 +1,27 @@
 <template>
-  <div id="nav">{{viewName}}</div>
   <ul id="footer">
-    <li v-bind:class="footerNav" id="alivelist" @click="link">
+    <li class="footer-nav" 
+        id="alivelist" 
+        v-link="{path: '/user/alivelist', activeClass: 'active'}" 
+        >
       <i class="iconfont" >&#xe600</i>biu
     </li>
-    <li v-bind:class="footerNav" id="userlit" @click="link">
+    <li class="footer-nav" 
+        id="userlist" 
+        v-link="{path: '/user/userlist', activeClass: 'active'}"
+        >
       <i class="iconfont" >&#xe603</i>通讯录
     </li>
-    <li v-bind:class="footerNav" id="find" @click="link">
+    <li class="footer-nav" 
+        id="new" 
+        v-link="{path: '/user/new', activeClass: 'active'}"
+        >
       <i class="iconfont" id="xe602">&#xe602</i>发现
     </li>
-    <li v-bind:class="footerNav" id="account" @click="link">
+    <li class="footer-nav" 
+        id="account" 
+        v-link="{path: '/user/account', activeClass: 'active'}"
+        >
       <i class="iconfont" >&#xe601</i>我
     </li>
   </ul>
@@ -22,46 +33,19 @@
   export default {
     data: function() {
       return {
-        viewName: 'biubiu',
-        footerNav: 'footer-nav',
-        isActive: false,
-        active: true
       }
     },
     methods: {
-      link: function(e) {
-        switch(e.currentTarget.id)
-        {
-          case 'alivelist':
-            this.$router.go('/user/')
-            break
-          case 'userlit':
-            console.log(e.currentTarget.id)
-            this.$router.go('/user/userlist')
-            break
-          case 'find':
-            this.$router.go('/user/new')
-            break
-          case 'account':
-            this.$router.go('/user/account')
-        }
-        
-      }
+    
     },
-    created: function() {
-      console.log(document.location)
-    }
   }
 </script>
 
 <style lang="scss">
   @import '../utils/utils.scss';
-  #nav {
-    text-align: center;
-  }
   #footer {
     position: fixed;
-    bottom: 0px;
+    bottom: 2px;
     width: 100%;
     background-color: $gray-bg;
     .footer-nav {

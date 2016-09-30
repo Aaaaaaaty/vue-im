@@ -19,7 +19,7 @@ router.map({
   '/user': {
     component: User,
     subRoutes: {
-      '/': {
+      '/alivelist': {
         component: AliveList
       },
       '/account': {
