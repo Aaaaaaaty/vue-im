@@ -30,12 +30,12 @@ export default {
     login: function() {
       let user = {
         username: this.user,
-        password: this.psd
+        password: this.psd,
+        friendslist: ['an', 'abc', 'admin'],
       }
-      // this.userLogin(user)
-
-      this.$http.post('http://localhost:3000/api/login', user).then((res) => {
+      this.$http.post('http://localhost:3000/api/updateUser', user).then((res) => {
         var result = res.body
+        console.log(result)
         if(result.status === 'OK') {
           this.$router.go('/user')
         } else {
