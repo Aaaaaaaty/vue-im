@@ -1,7 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 input,textarea:-webkit-autofill {  
    -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 1) inset;  
 }
 input,button,select,textarea{outline:none}  
+
+
+@font-face {
+  font-family: 'iconfont';
+  src: url('//at.alicdn.com/t/font_1475203642_438593.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/font_1475203642_438593.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/font_1475203642_438593.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/font_1475203642_438593.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/font_1475203642_438593.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+
 // color
 $black: #4a4a4a;
 
@@ -25,6 +41,7 @@ $blue: rgba(0, 175, 244, 1);
 $blue-line: rgba(232, 239, 248, 1);
 $blue-button-out: rgba(173, 217, 234, 1);
 $blue-button-in: rgba(0, 124, 182, 1);
+$blue-icon: #56abe4;
 $weixin: #91e231;
 $alipay: #4a90e2;
 $simulate: #ff966b;
