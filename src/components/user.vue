@@ -45,7 +45,7 @@
   @import '../utils/utils.scss';
   #footer {
     position: fixed;
-    bottom: 2px;
+    bottom: 0;
     width: 100%;
     background-color: $gray-bg;
     .footer-nav {

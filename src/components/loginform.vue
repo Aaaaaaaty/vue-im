@@ -34,7 +34,7 @@ export default {
         friendslist: ['an', 'abc', 'admin1211'],
       }
       console.log(user)
-      this.$http.post('http://localhost:3000/api/updateUser', user).then((res) => {
+      this.$http.post('http://localhost:3000/api/login', user).then((res) => {
         var result = res.body
         console.log(result)
         if(result.status === 'OK') {

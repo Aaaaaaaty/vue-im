@@ -49,11 +49,13 @@ $simulate: #ff966b;
 
 
 #nav {
-    background-color:$gray-bg;
-    height: 50px;
-    line-height: 50px;
-    color: $gray-holder;
-    font-size: 16px;
-    font-weight: 700;
-    text-align: center;
+  position: fixed;
+  width: 100%;
+  background-color:$gray-bg;
+  height: 50px;
+  line-height: 50px;
+  color: $gray-holder;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
   }
