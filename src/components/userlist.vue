@@ -1,7 +1,7 @@
 <template>
   <div id="nav">通讯录</div>
-  <div class="user-list">
-    <div class="user-item" v-for="user in userList">
+  <div class="content">
+    <div class="user-item" v-for="user in userList" @click="startTalk">
       {{user.username}}
     </div>
   </div>
@@ -15,6 +15,10 @@
       }
     },
     methods: {
+      startTalk: function(e) {
+        var text = e.target.innerText
+        this.$router.go('/talk/'+text)
+      }
     },
     created: function() {
       this.$http.post('http://localhost:3000/api/getUserList').then((res) => {
@@ -28,7 +32,10 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
   @import '../utils/utils.scss';
-  .user-list {
-    padding-top: 50px;
+  .user-item {
+    height: 30px;
+    line-height: 30px;
+    padding-left: 15px;
+    border-bottom: 1px solid $gray-bg;
   }
 </style>

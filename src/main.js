@@ -8,6 +8,7 @@ import AliveList from './components/alivelist'
 import Account from './components/account'
 import UserList from './components/userlist'
 import New from './components/new'
+import Talk from './components/talk'
 // 定义组件
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -33,5 +34,8 @@ router.map({
       }
     }
   },
+  '/talk/:username': {
+    component: Talk
+  }
 })
 router.start(App, '#app')
