@@ -31,13 +31,14 @@ export default {
       let user = {
         username: this.user,
         password: this.psd,
-        friendslist: ['an', 'abc', 'admin'],
+        friendslist: ['an', 'abc', 'admin1211'],
       }
+      console.log(user)
       this.$http.post('http://localhost:3000/api/updateUser', user).then((res) => {
         var result = res.body
         console.log(result)
         if(result.status === 'OK') {
-          this.$router.go('/user')
+          this.$router.go('/user/alivelist')
         } else {
           alert(result.msg)
         }
