@@ -1,7 +1,6 @@
 <template>
   <div id="nav">{{$route.params.username}}</div>
   <div class="content">
-  aaa
   </div>
   <div class="talker">
     <input class="talker-input" type="text">
@@ -19,13 +18,6 @@
     methods: {
       
     },
-    created: function() {
-      // var user = this.$router.params.username
-      console.log(1)
-      console.log(this.$route.params)
-      // this.user = user
-    }
-    
   }
 </script>
 
