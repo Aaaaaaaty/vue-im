@@ -18,6 +18,8 @@
     methods: {
       
     },
+    created: function() {
+    }
   }
 </script>
 

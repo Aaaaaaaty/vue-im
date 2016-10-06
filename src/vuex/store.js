@@ -4,15 +4,12 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  isLogin: true,
-  noLoginTitle: '登录失败，请重新输入'
+  loginId: ''
 }
 
 const mutations = {
-  login (state, status) {
-    if(status === 'OK') {
-      state.isLogin = false
-    } 
+  login (state, _id) {
+    state.loginId = _id
   }
 }
 

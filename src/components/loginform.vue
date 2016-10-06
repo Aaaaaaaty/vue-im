@@ -17,7 +17,6 @@
 </template>
 <script>
 import { userLogin } from '../vuex/actions'
-import { isLogin } from '../vuex/getters'
 import vuex from 'vuex'
 export default {
   data: function(){
@@ -30,20 +29,24 @@ export default {
     login: function() {
       let user = {
         username: this.user,
-        password: this.psd,
-        friendslist: ['an', 'abc', 'admin1211'],
+        password: this.psd
       }
-      console.log(user)
       this.$http.post('http://localhost:3000/api/login', user).then((res) => {
         var result = res.body
-        console.log(result)
+        var _id = result.data.user._id
         if(result.status === 'OK') {
+          this.userLogin(_id)
           this.$router.go('/user/alivelist')
         } else {
           alert(result.msg)
         }
       })
     },
+  },
+  vuex: {
+    actions: {
+      userLogin: userLogin
+    }
   }
 }
 </script>
