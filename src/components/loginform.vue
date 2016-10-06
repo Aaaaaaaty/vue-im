@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="app-logo">
-      <img src="../public/img/logo.jpeg" alt="">
+      <img src="../public/img/logo.png" alt="">
     </div>
     <div class="input-content">
       <input v-model="user" class="user-input" type="text"  placeholder="用户名">

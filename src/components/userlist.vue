@@ -1,5 +1,5 @@
 <template>
-  <div id="nav" @click="an">通讯录</div>
+  <div id="nav">通讯录</div>
   <div class="content">
     <div class="user-item" v-for="user in userList" @click="startTalk">
       {{user}}
@@ -22,17 +22,16 @@ import { getLoginId } from '../vuex/getters'
           path: '/talk/'+text
         })
       },
-      an: function() {
-
-        this.$http.post('http://localhost:3000/api/getUser', { id: this.loginId }).then((res) => {
+    },
+    ready: function() { 
+       this.$http.post('http://localhost:3000/api/getUser', { id: this.loginId }).then((res) => {
           var userList = res.body
           console.log(userList.data.user)
           this.userList = userList.data.user.friendslist
         })
-      }
     },
-    created: function() {
-      console.log(this.loginId)
+    router:{
+      canReuse: true
     },
     vuex: {
       getters: {

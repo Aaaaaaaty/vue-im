@@ -3,22 +3,27 @@
   <div class="content">
   </div>
   <div class="talker">
-    <input class="talker-input" type="text">
-    <span class="talker-send">发送</span>
+    <input class="talker-input" type="text" v-model="msg">
+    <span class="talker-send" @click="submit">发送</span>
   </div>
 </template>
 
 <script>
+  import CHAT from '../client'
   export default {
     data: function() {
       return {
-        user: ''
+        msg:''
       }
     },
     methods: {
-      
+      submit: function(){
+        CHAT.submit(this.msg)
+        this.msg = ''
+      }
     },
-    created: function() {
+    ready: function() {
+      CHAT.init()
     }
   }
 </script>
