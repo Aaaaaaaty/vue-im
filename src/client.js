@@ -18,21 +18,8 @@ const CHAT={
     // location.reload();
   },
   //提交聊天消息内容
-  submit:function(msg){
-    if(msg != ''){
-      let obj = {
-        // userid: this.userid,
-        // username: this.username,
-        msg: msg,
-        // color: this.color
-      };
-      console.log(obj)
-      this.socket.emit('message', obj);
-    }else{
-      console.log('msg is null')
-    }
-    
-    return false;
+  submit:function(obj){
+    this.socket.emit('sendMsg', obj);
   },
   genUid:function(){
     return new Date().getTime()+""+Math.floor(Math.random()*899+100);
@@ -76,25 +63,22 @@ const CHAT={
     this.weichat = localStorage.getItem('weichat');
     this.socket.emit('changeInfo', {userid:this.userid, username:this.username,color:this.color,weichat:this.weichat});
   },
-  init:function(){
-    /*
-    客户端根据时间和随机数生成uid,这样使得聊天室用户名称可以重复。
-    实际项目中，如果是需要用户登录，那么直接采用用户的uid来做标识就可以
-    */
-    // this.userid = this.genUid();
-    // this.userid = localStorage.getItem('userid');
-    // this.username = localStorage.getItem('name');
-    // this.color = localStorage.getItem('color');
-    // this.weichat = localStorage.getItem('weichat');
-
-    // if (!this.userid) {return}
-    // this.username = Math.floor(Math.random()*10);
-    
+  genUid:function(){
+    return new Date().getTime()+""+Math.floor(Math.random()*899+100);
+  },
+  init:function(toUser, fromUser){
     //连接websocket后端服务器
     this.socket = io.connect('127.0.0.1:3000');
     this.socket.on('open', function() {
-    console.log('已连接')
-  })
+      console.log('已连接')
+    })
+    this.socket.emit('addUser', toUser, fromUser)
+    this.socket.on('to' + toUser, function(msg) {
+      console.log(msg)
+    })
+    this.socket.on('to' + fromUser, function(msg) {
+      console.log('a',msg)
+    })
     //告诉服务器端有用户登录
     // this.socket.emit('login', {userid:this.userid, username:this.username,color:this.color,weichat:this.weichat});
     //心跳包，30s左右无数据浏览器会断开连接Heartbeat
@@ -118,10 +102,10 @@ const CHAT={
     // });
     
     //监听消息发送
-    this.socket.on('message', function(obj){
+    // this.socket.on('message', function(obj){
       // var isme = (obj.userid == CHAT.userid) ? true : false;
-      CHAT.msgArr.push(obj) 
-    });
+    //   CHAT.msgArr.push(obj) 
+    // });
 
   }
 } 

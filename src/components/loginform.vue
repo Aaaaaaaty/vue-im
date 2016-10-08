@@ -31,11 +31,11 @@ export default {
         username: this.user,
         password: this.psd
       }
-      this.$http.post('http://localhost:3000/api/login', user).then((res) => {
+      this.$http.post('http://127.0.0.1:3000/api/login', user).then((res) => {
         var result = res.body
-        var _id = result.data.user._id
+        var username = result.data.user.username
         if(result.status === 'OK') {
-          this.userLogin(_id)
+          this.userLogin(username)
           this.$router.go('/user/alivelist')
         } else {
           alert(result.msg)

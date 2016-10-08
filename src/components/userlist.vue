@@ -9,6 +9,7 @@
 
 <script>
 import { getLoginId } from '../vuex/getters'
+import CHAT from '../client'
   export default {
     data: function() {
       return {
@@ -24,11 +25,10 @@ import { getLoginId } from '../vuex/getters'
       },
     },
     ready: function() { 
-       this.$http.post('http://localhost:3000/api/getUser', { id: this.loginId }).then((res) => {
-          var userList = res.body
-          console.log(userList.data.user)
-          this.userList = userList.data.user.friendslist
-        })
+      this.$http.post('http://localhost:3000/api/getUser', { username: this.loginId }).then((res) => {
+        var userList = res.body
+        this.userList = userList.data.user.friendslist
+      })
     },
     router:{
       canReuse: true

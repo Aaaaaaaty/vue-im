@@ -9,23 +9,34 @@
 </template>
 
 <script>
-  import CHAT from '../client'
-  export default {
-    data: function() {
-      return {
-        msg:''
-      }
-    },
-    methods: {
-      submit: function(){
-        CHAT.submit(this.msg)
-        this.msg = ''
-      }
-    },
-    ready: function() {
-      CHAT.init()
+import { getLoginId } from '../vuex/getters'
+import CHAT from '../client'
+export default {
+  data: function() {
+    return {
+      msg:'',
     }
-  }
+  },
+  methods: {
+    submit: function(){
+      var obj = {
+        msg: this.msg,
+        toUser: this.$route.params.username,
+        fromUser: this.loginId
+      }
+      CHAT.submit(obj)
+      this.msg = ''
+    }
+  },
+  ready: function() {
+    CHAT.init(this.$route.params.username, this.loginId)
+  },
+  vuex: {
+    getters: {
+      loginId: getLoginId
+    }
+  },
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
