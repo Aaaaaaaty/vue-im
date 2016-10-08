@@ -9,7 +9,6 @@
 
 <script>
 import { getLoginId } from '../vuex/getters'
-import CHAT from '../client'
   export default {
     data: function() {
       return {

@@ -29,7 +29,11 @@ export default {
     }
   },
   ready: function() {
-    CHAT.init(this.$route.params.username, this.loginId)
+    console.log('ready')
+    var obj = {}
+    if(CHAT.message(this.loginId)) {
+      console.log(CHAT.message(this.loginId))
+    }
   },
   vuex: {
     getters: {

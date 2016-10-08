@@ -18,6 +18,7 @@
 <script>
 import { userLogin } from '../vuex/actions'
 import vuex from 'vuex'
+import CHAT from '../client'
 export default {
   data: function(){
     return {
@@ -36,6 +37,7 @@ export default {
         var username = result.data.user.username
         if(result.status === 'OK') {
           this.userLogin(username)
+          CHAT.init(username)
           this.$router.go('/user/alivelist')
         } else {
           alert(result.msg)

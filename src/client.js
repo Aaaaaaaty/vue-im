@@ -8,6 +8,7 @@ const CHAT={
   onlineCount:0,
   onlineUsers:null,
   msgArr:[],
+  i:0,
   //让浏览器滚动条保持在最低部
   scrollToBottom:function(){
     // window.scrollTo(0, 900000);
@@ -66,19 +67,20 @@ const CHAT={
   genUid:function(){
     return new Date().getTime()+""+Math.floor(Math.random()*899+100);
   },
-  init:function(toUser, fromUser){
+  message: function(username) {
+    this.socket.on('to' + username, function(msg) {
+      console.log(msg)
+      return msg
+    })
+  },
+  init:function(username){
     //连接websocket后端服务器
     this.socket = io.connect('127.0.0.1:3000');
     this.socket.on('open', function() {
       console.log('已连接')
     })
-    this.socket.emit('addUser', toUser, fromUser)
-    this.socket.on('to' + toUser, function(msg) {
-      console.log(msg)
-    })
-    this.socket.on('to' + fromUser, function(msg) {
-      console.log('a',msg)
-    })
+    // console.log(toUser, fromUser)
+    this.socket.emit('addUser', username)
     //告诉服务器端有用户登录
     // this.socket.emit('login', {userid:this.userid, username:this.username,color:this.color,weichat:this.weichat});
     //心跳包，30s左右无数据浏览器会断开连接Heartbeat
