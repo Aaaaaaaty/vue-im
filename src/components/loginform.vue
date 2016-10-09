@@ -56,6 +56,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss"> 
   @import '../utils/utils.scss';
+  // body {
+  //   background-color: rgba(255,255,255,1);
+  // }
   .input-content {
     text-align: center;
     margin-bottom: 30px;
@@ -66,6 +69,7 @@ export default {
       border-bottom: 1px solid $blue-line;
       padding-top: 10px;
       padding-bottom: 7px;
+      text-align: center;
     }
     .user-input::-webkit-input-placeholder {
       color:$gray-holder;
@@ -76,13 +80,14 @@ export default {
     text-align: center;
     .login {
       display: inline-block;
-      border: 1px solid $blue-button-in;
+      // border: 1px solid $right-red;
       border-radius: 15px;
       font-size: 14px;
       padding: 6px 30% 6px 30%;
-      background-color: $blue-button-in;
+      background: -webkit-linear-gradient(left top, $left-red, $right-red);
       color: $white;
       text-decoration: none;
+      vertical-align:middle
     }
   }
   .app-logo {

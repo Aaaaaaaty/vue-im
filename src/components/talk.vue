@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="talker">
-    <input class="talker-input" type="text" v-model="msg" placeholder="Type your message..">
+    <textarea class="talker-input" type="text" v-model="msg" placeholder="Type your message.."></textarea>
     <span class="talker-send iconfont " @click="submit">&#xe605</span> 
   </div>
 </template>
@@ -46,7 +46,7 @@ export default {
       }
       this.msg = ''
       CHAT.submit(obj)
-      // console.log(CHAT.msgArr[0].toUser != this.$route.params.username)
+      CHAT.scrollToBottom()
     },
     wait: function() {
       CHAT.message(this.loginId)
@@ -65,7 +65,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
+<style lang="scss" >
   @import '../utils/utils.scss';
   .content {
     .talk-space {
@@ -80,9 +80,10 @@ export default {
         min-height: 30px;
         line-height: 30px;
         margin: 0 1%;
-        padding: 4px 8px 2px 6px;
+        padding: 4px 12px 2px 11px;
         border-radius: 5px;
         font-size: 12px;
+        word-break: break-all;
       }
       .talk-word-self {
         border-bottom-right-radius: 0px;
@@ -150,15 +151,19 @@ export default {
     height: 40px;
     .talker-input {
       position: absolute;
+      z-index: 20;
       border: none;
       height: 100%;
-      outline:medium;
-      width: 100%;
-      padding-left: 20px;
+      outline: medium;
+      width: 97%;
+      padding-top: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
       box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.08);
     }
     .talker-send {
       position: absolute;
+      z-index: 30;
       border-radius: 33px;
       width: 16px;
       top: -24px;

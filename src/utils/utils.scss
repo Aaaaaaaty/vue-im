@@ -2,10 +2,7 @@
   margin: 0;
   padding: 0;
 }
-input,textarea:-webkit-autofill {  
-   -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 1) inset;  
-}
-input,button,select,textarea{outline:none}  
+
 
 
 @font-face {
@@ -50,11 +47,18 @@ $simulate: #ff966b;
 
 $left-red: rgba(246, 94, 84, 1);
 $right-red: rgba(218, 43, 101, 1);
-
-
+$bg: rgba(243, 243, 243, 1);
 body {
-  background-color: rgba(243, 243, 243, 1);
+  background-color: rgba(255,255,255,1);
 }
+input,textarea:-webkit-autofill {  
+   -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 1) inset;
+   background-color: transparent;  
+}
+input {
+  background-color: transparent;
+}
+input,button,select,textarea{outline:none} 
 .content {
   padding-top: 50px;
 }

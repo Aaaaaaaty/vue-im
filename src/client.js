@@ -11,7 +11,8 @@ const CHAT={
   lock:{},
   //让浏览器滚动条保持在最低部
   scrollToBottom:function(){
-    // window.scrollTo(0, 900000);
+    console.log(1)
+    window.scrollTo(0, 900000);
   },
   //退出，本例只是一个简单的刷新
   logout:function(){

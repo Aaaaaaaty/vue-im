@@ -47,7 +47,8 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: $gray-bg;
+    background-color: $white;
+    box-shadow: 0px 0px 15px 2px rgba(218, 43, 101, 0.3);
     .footer-nav {
       display: block;
       position: relative;
@@ -73,7 +74,7 @@
       list-style: none;
     }
     .active {
-      color: $blue-icon;
+      color: $right-red;
     }
   }
 </style>
