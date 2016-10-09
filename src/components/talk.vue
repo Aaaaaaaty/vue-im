@@ -1,14 +1,26 @@
 <template>
   <div id="nav">{{$route.params.username}}</div>
   <div class="content">
-    <div v-if="CHAT.msgArr.toUser == $route.params.username">测试</div>
-    <div v-for="msgObj in CHAT.msgArr" track-by="$index">
-      {{msgObj.msg}}
+    <div v-for="msgObj in CHAT.msgArr" >
+      <div  class="talk-space self-talk" 
+            v-if="CHAT.msgArr[$index].fromUser == username && CHAT.msgArr[$index].toUser == $route.params.username" 
+            track-by="$index">
+        <div class="talk-content">
+          <div class="talk-word talk-word-self">{{msgObj.msg}}</div><i class="swip"></i>
+        </div>
+      </div>
+      <div  class="talk-space user-talk" 
+            v-if="CHAT.msgArr[$index].toUser == username && CHAT.msgArr[$index].fromUser == $route.params.username"
+            track-by="$index">
+        <div class="talk-content">
+          <div class="talk-word talk-word-user">{{msgObj.msg}}<i class="swip-user"></i></div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="talker">
-    <input class="talker-input" type="text" v-model="msg">
-    <span class="talker-send" @click="submit">发送</span>
+    <input class="talker-input" type="text" v-model="msg" placeholder="Type your message..">
+    <span class="talker-send iconfont " @click="submit">&#xe605</span> 
   </div>
 </template>
 
@@ -21,7 +33,8 @@ export default {
     return {
       msg:'',
       message: [1,2],
-      CHAT
+      CHAT,
+      username: ''
     }
   },
   methods: {
@@ -33,8 +46,7 @@ export default {
       }
       this.msg = ''
       CHAT.submit(obj)
-      console.log(CHAT.msgArr)
-      console.log(this.$route.params.username)
+      // console.log(CHAT.msgArr[0].toUser != this.$route.params.username)
     },
     wait: function() {
       CHAT.message(this.loginId)
@@ -42,6 +54,7 @@ export default {
   },
   ready: function() {
     this.wait()
+    this.username = this.loginId
   },
   vuex: {
     getters: {
@@ -54,31 +67,117 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
   @import '../utils/utils.scss';
+  .content {
+    .talk-space {
+      width: 100%;
+      margin-bottom: 16px;
+      .talk-word {
+        display: inline-block;
+        position: relative;
+        background: -webkit-linear-gradient(left top, $left-red, $right-red); /* Safari 5.1 - 6.0 */
+        color: $white;
+        max-width: 60%;
+        min-height: 30px;
+        line-height: 30px;
+        margin: 0 1%;
+        padding: 4px 8px 2px 6px;
+        border-radius: 5px;
+        font-size: 12px;
+      }
+      .talk-word-self {
+        border-bottom-right-radius: 0px;
+        margin-right: 10px;
+        text-align: left;
+      }
+      .talk-word-user {
+        background: none;
+        background-color: $white;
+        color: $black;
+        border-bottom-left-radius: 0px;
+        margin-left: 10px;
+        text-align: right;
+      }
+      .swip {
+        width: 0;
+        height: 0;
+        border-width: 10px 0px 0px 7px;
+        border-style: solid;
+        border-color: #da2b65 transparent transparent;
+        margin: 40px auto;
+        position: absolute;
+        bottom: -50px;
+        right: 10px;
+        z-index: 1;
+      }
+      .swip-user {
+        width: 0;
+        height: 0;
+        border-width: 10px 8px 0px 0px;
+        border-style: solid;
+        border-color: $white transparent transparent;
+        margin: 40px auto;
+        position: absolute;
+        bottom: -50px;
+        left: 0px;
+        z-index: 1;
+      }
+    }
+    .self-talk {
+      .talk-img {
+        float: right;
+        width: auto;
+      }
+      .talk-content {
+        text-align: right;
+        position: relative;
+      }
+    }
+    .user-talk {
+      .talk-img {
+        float: left;
+        width: auto;
+      }
+      .talk-content {
+        text-align: left;
+        position: relative;
+      }
+    }
+  }
   .talker {
     position: fixed;
     bottom: 0;
     width: 100%;
-    border: 1px solid $blue-button-in;
-    border-radius: 17px;
+    height: 40px;
     .talker-input {
       position: absolute;
       border: none;
       height: 100%;
       outline:medium;
-      width: 75%;
-      left: 5%;
+      width: 100%;
+      padding-left: 20px;
+      box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.08);
     }
     .talker-send {
-      float: right;
-      width: 11%;
+      position: absolute;
+      border-radius: 33px;
+      width: 16px;
+      top: -24px;
+      left: 82%;
+      padding: 15px;
       text-align: center; 
-      border: 1px solid $blue-button-in;
-      border-radius: 15px;
       font-size: 14px;
-      padding: 6px 3% 6px 3%;
-      background-color: $blue-button-in;
+      background: -webkit-linear-gradient(left top, $left-red, $right-red);
       color: $white;
       text-decoration: none;
+      box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.3);
     }
+  }
+  .iconfont {
+    font-family: "iconfont";
+    font-size: 24px;
+    font-style: normal;
+    position: absolute;
+    left: 60%;
+    top: 17%;
   }
 </style>
