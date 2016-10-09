@@ -7,7 +7,7 @@ const CHAT={
   socket:null,
   onlineCount:0,
   onlineUsers:null,
-  msgArr:[1,2,3],
+  msgArr:[],
   lock:{},
   //让浏览器滚动条保持在最低部
   scrollToBottom:function(){
@@ -68,21 +68,20 @@ const CHAT={
     return new Date().getTime()+""+Math.floor(Math.random()*899+100);
   },
   message: function(username) {
-    if(!CHAT.lock['k']) {
+      console.log('waiting..')
+      console.log(this.socket)
       this.socket.on('to' + username, function(obj) {
-        CHAT.msgArr.push(obj.msg)
-        console.log(CHAT.msgArr)
-      })
-      CHAT.lock['k'] = true
-    }
-    
+        console.log(obj)
+        CHAT.msgArr.push(obj)
+      })    
   },
   init:function(username){
     //连接websocket后端服务器
-    this.socket = io.connect('127.0.0.1:3000');
+    this.socket = io.connect('127.0.0.1:3000',{'force new connection': true})
     this.socket.on('open', function() {
       console.log('已连接')
     })
+    console.log(this.socket.id)
     // console.log(toUser, fromUser)
     this.socket.emit('addUser', username)
     //告诉服务器端有用户登录

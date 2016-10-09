@@ -1,8 +1,9 @@
 <template>
   <div id="nav">{{$route.params.username}}</div>
   <div class="content">
+    <div v-if="CHAT.msgArr.toUser == $route.params.username">测试</div>
     <div v-for="msgObj in CHAT.msgArr" track-by="$index">
-      {{msgObj}}
+      {{msgObj.msg}}
     </div>
   </div>
   <div class="talker">
@@ -32,6 +33,8 @@ export default {
       }
       this.msg = ''
       CHAT.submit(obj)
+      console.log(CHAT.msgArr)
+      console.log(this.$route.params.username)
     },
     wait: function() {
       CHAT.message(this.loginId)
