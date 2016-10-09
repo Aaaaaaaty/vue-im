@@ -1,6 +1,9 @@
 <template>
   <div id="nav">{{$route.params.username}}</div>
   <div class="content">
+    <div v-for="msgObj in CHAT.msgArr" track-by="$index">
+      {{msgObj}}
+    </div>
   </div>
   <div class="talker">
     <input class="talker-input" type="text" v-model="msg">
@@ -10,11 +13,14 @@
 
 <script>
 import { getLoginId } from '../vuex/getters'
+import io from 'socket.io-client'
 import CHAT from '../client'
 export default {
   data: function() {
     return {
       msg:'',
+      message: [1,2],
+      CHAT
     }
   },
   methods: {
@@ -24,16 +30,15 @@ export default {
         toUser: this.$route.params.username,
         fromUser: this.loginId
       }
-      CHAT.submit(obj)
       this.msg = ''
+      CHAT.submit(obj)
+    },
+    wait: function() {
+      CHAT.message(this.loginId)
     }
   },
   ready: function() {
-    console.log('ready')
-    var obj = {}
-    if(CHAT.message(this.loginId)) {
-      console.log(CHAT.message(this.loginId))
-    }
+    this.wait()
   },
   vuex: {
     getters: {

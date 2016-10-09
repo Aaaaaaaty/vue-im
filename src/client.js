@@ -7,8 +7,8 @@ const CHAT={
   socket:null,
   onlineCount:0,
   onlineUsers:null,
-  msgArr:[],
-  i:0,
+  msgArr:[1,2,3],
+  lock:{},
   //让浏览器滚动条保持在最低部
   scrollToBottom:function(){
     // window.scrollTo(0, 900000);
@@ -68,10 +68,14 @@ const CHAT={
     return new Date().getTime()+""+Math.floor(Math.random()*899+100);
   },
   message: function(username) {
-    this.socket.on('to' + username, function(msg) {
-      console.log(msg)
-      return msg
-    })
+    if(!CHAT.lock['k']) {
+      this.socket.on('to' + username, function(obj) {
+        CHAT.msgArr.push(obj.msg)
+        console.log(CHAT.msgArr)
+      })
+      CHAT.lock['k'] = true
+    }
+    
   },
   init:function(username){
     //连接websocket后端服务器
