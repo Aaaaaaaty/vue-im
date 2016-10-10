@@ -26,7 +26,7 @@
     </li>
   </ul>
 
-  <router-view></router-view>
+  <router-view keep-alive></router-view>
 </template>
 
 <script>

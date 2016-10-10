@@ -39,7 +39,7 @@ export default {
         var username = result.data.user.username
         if(result.status === 'OK') {
           this.userLogin(username)
-          CHAT.init(username)
+          // CHAT.init(username)
           this.$router.go('/user/alivelist')
         } else {
           alert(result.msg)

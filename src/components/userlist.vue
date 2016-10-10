@@ -10,6 +10,7 @@
 <script>
 import { getLoginId } from '../vuex/getters'
 import settings from '../settings.js'
+import CHAT from '../client'
   export default {
     data: function() {
       return {
@@ -19,6 +20,7 @@ import settings from '../settings.js'
     methods: {
       startTalk: function(e) {
         var text = e.target.innerText
+        CHAT.init(this.loginId)
         this.$router.go({
           path: '/talk/'+text
         })

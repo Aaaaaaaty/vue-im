@@ -1,7 +1,7 @@
 <template>
   <div id="nav">{{$route.params.username}}</div>
   <div class="content">
-    <div v-for="msgObj in CHAT.msgArr" >
+    <div v-for="msgObj in CHAT.msgArr" track-by="$index">
       <div  class="talk-space self-talk" 
             v-if="CHAT.msgArr[$index].fromUser == username && CHAT.msgArr[$index].toUser == $route.params.username" 
             track-by="$index">
@@ -60,7 +60,7 @@ export default {
     getters: {
       loginId: getLoginId
     }
-  },
+  }
 }
 </script>
 
@@ -80,8 +80,8 @@ export default {
         background: -webkit-linear-gradient(left top, $left-red, $right-red); /* Safari 5.1 - 6.0 */
         color: $white;
         max-width: 60%;
-        min-height: 30px;
-        line-height: 30px;
+        min-height: 25px;
+        line-height: 25px;
         margin: 0 1%;
         padding: 4px 12px 2px 11px;
         border-radius: 5px;
@@ -151,6 +151,7 @@ export default {
   }
   .talker {
     position: fixed;
+    z-index: 3;
     bottom: 0;
     width: 100%;
     height: 40px;
