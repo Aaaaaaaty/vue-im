@@ -9,6 +9,7 @@
 
 <script>
 import { getLoginId } from '../vuex/getters'
+import settings from '../settings.js'
   export default {
     data: function() {
       return {
@@ -24,7 +25,7 @@ import { getLoginId } from '../vuex/getters'
       },
     },
     ready: function() { 
-      this.$http.post('http://localhost:3000/api/getUser', { username: this.loginId }).then((res) => {
+      this.$http.post(settings.server+'/getUser', { username: this.loginId }).then((res) => {
         var userList = res.body
         this.userList = userList.data.user.friendslist
       })
