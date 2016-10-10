@@ -1,3 +1,3 @@
 export default {
-	server: 'http://localhost:3000/api'
+	server: 'http://127.0.0.1:3000/api'
 }

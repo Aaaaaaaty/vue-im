@@ -19,6 +19,7 @@
 import { userLogin } from '../vuex/actions'
 import vuex from 'vuex'
 import CHAT from '../client'
+import settings from '../settings.js'
 export default {
   data: function(){
     return {
@@ -32,7 +33,8 @@ export default {
         username: this.user,
         password: this.psd
       }
-      this.$http.post('http://127.0.0.1:3000/api/login', user).then((res) => {
+      console.log(settings.server)
+      this.$http.post(settings.server+'/login', user).then((res) => {
         var result = res.body
         var username = result.data.user.username
         if(result.status === 'OK') {
