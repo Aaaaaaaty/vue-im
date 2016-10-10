@@ -1,4 +1,5 @@
 import io from 'socket.io-client'
+import settings from './settings.js'
 const CHAT={
   msgObj:document.getElementsByClassName("body-wrapper")[0],
   username:null,
@@ -78,7 +79,7 @@ const CHAT={
   },
   init:function(username){
     //连接websocket后端服务器
-    this.socket = io.connect('127.0.0.1:3000',{'force new connection': true})
+    this.socket = io.connect(settings.socket,{'force new connection': true})
     this.socket.on('open', function() {
       console.log('已连接')
     })

@@ -95,7 +95,7 @@ export default {
       }
       .talk-word-user {
         background: none;
-        background-color: $white;
+        background-color: rgba(243,243,243,1);
         color: $black;
         border-bottom-left-radius: 0px;
         margin-left: 10px;
@@ -118,7 +118,7 @@ export default {
         height: 0;
         border-width: 10px 8px 0px 0px;
         border-style: solid;
-        border-color: $white transparent transparent;
+        border-color: rgba(243,243,243,1) transparent transparent;
         margin: 40px auto;
         position: absolute;
         bottom: -50px;
@@ -127,6 +127,7 @@ export default {
       }
     }
     .self-talk {
+      margin-top: 10px;
       .talk-img {
         float: right;
         width: auto;
@@ -137,6 +138,7 @@ export default {
       }
     }
     .user-talk {
+      margin-top: 10px;
       .talk-img {
         float: left;
         width: auto;
