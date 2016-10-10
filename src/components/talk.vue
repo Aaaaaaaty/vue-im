@@ -65,8 +65,11 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" >
+<style lang="scss" scoped>
   @import '../utils/utils.scss';
+  body {
+    // background-color: rgba(243,243,243,1)
+  }
   .content {
     .talk-space {
       width: 100%;

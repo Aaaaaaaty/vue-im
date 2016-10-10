@@ -56,9 +56,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss"> 
   @import '../utils/utils.scss';
-  // body {
-  //   background-color: rgba(255,255,255,1);
-  // }
   .input-content {
     text-align: center;
     margin-bottom: 30px;

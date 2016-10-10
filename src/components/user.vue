@@ -48,7 +48,7 @@
     bottom: 0;
     width: 100%;
     background-color: $white;
-    box-shadow: 0px 0px 15px 2px rgba(218, 43, 101, 0.3);
+    // box-shadow: 0px 0px 15px 2px rgba(218, 43, 101, 0.3);
     .footer-nav {
       display: block;
       position: relative;
@@ -75,6 +75,7 @@
     }
     .active {
       color: $right-red;
+      border-top: 2px solid;
     }
   }
 </style>
