@@ -1,6 +1,4 @@
 <template>
-  <div id="nav">我</div>
-  <h1>account</h1>
 </template>
 
 <script>

@@ -19,7 +19,7 @@
 
 // color
 $black: rgba(0, 0, 0, 1);
-
+$background-color: #2e3238;
 $gray: #9b9b9b;
 $gray-light: #ccc;
 $gray-bg: #f7f7f7;
@@ -27,6 +27,10 @@ $gray-field: #e4e4e4;
 $gray-holder: rgba(123, 135, 146, 1);
 $green: #0AA082;
 $green-light: #96BEB4;
+
+
+$white-list: rgba(251,251,251,1);
+$white-talk: rgba(243,243,243,1);
 
 $red: #F05F50;
 $red-dark: $red;
@@ -52,16 +56,17 @@ body {
   background-color: rgba(255,255,255,1);
 }
 input,textarea:-webkit-autofill {  
-   -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 1) inset;
+   // -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 1) inset;
    background-color: transparent;  
 }
 input {
-  background-color: transparent;
+  -webkit-appearance: none;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: text;
+  cursor: auto;
+  border: none;
 }
 input,button,select,textarea{outline:none} 
-.content {
-  padding-top: 50px;
-}
 #nav {
   position: fixed;
   z-index: 10000;

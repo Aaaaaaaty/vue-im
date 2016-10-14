@@ -1,6 +1,4 @@
 <template>
-  <div id="nav">发现</div>
-  <h1>account</h1>
 </template>
 
 <script>

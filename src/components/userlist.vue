@@ -1,10 +1,16 @@
 <template>
-  <div id="nav">通讯录</div>
-  <div class="content">
-    <div class="user-item" v-for="user in userList" @click="startTalk">
-      {{user}}
+  <div class="user-list">
+    <div class="user-content">
+      <div class="user-item" track-by="$index" v-for="user in userList" @click="startTalk">
+        <div class="user-img"></div>
+        <div class="user-name">
+          {{user}}
+          <p class="user-msg"></p>
+        </div>
+      </div>
     </div>
   </div>
+  <router-view keep-alive></router-view>
 </template>
 
 <script>
@@ -14,15 +20,15 @@ import CHAT from '../client'
   export default {
     data: function() {
       return {
-        userList: []
+        userList: ['an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup','an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup']
       }
     },
     methods: {
       startTalk: function(e) {
-        var text = e.target.innerText
-        CHAT.init(this.loginId)
+      //   var text = e.target.innerText
+      //   CHAT.init(this.loginId)
         this.$router.go({
-          path: '/talk/'+text
+          path: '/user/userlist/talk/'
         })
       },
     },
@@ -46,10 +52,54 @@ import CHAT from '../client'
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
   @import '../utils/utils.scss';
-  .user-item {
-    height: 30px;
-    line-height: 30px;
-    padding-left: 15px;
-    border-bottom: 1px solid $gray-bg;
+  .user-list {
+    // display: block;
+    position: absolute;
+    top: 154px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 280px;
+    background-color: $background-color;
+    overflow-y: scroll;
+    .user-content {
+      height: 100%;
+      .user-item {
+        overflow: hidden;
+        padding: 12px 18px 11px;
+        border-bottom: 1px solid #292C33;
+        cursor: pointer;
+        position: relative;
+        color: $white;
+        .user-img {
+          float: left;
+          margin-right: 10px;
+          position: relative;
+          width: 40px;
+          height: 40px;
+          background-color: $gray;
+        }
+        .user-name {
+          overflow: hidden;
+          font-weight: 400;
+          font-size: 13px;
+          color: #FFF;
+          line-height: 20px;
+          .user-msg {
+            font-size: 13px;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: normal;
+            height: 1.5em;
+          }
+        }
+      }
+    }
   }
+  .user-list::-webkit-scrollbar {
+    width:0px
+  }
+  
 </style>

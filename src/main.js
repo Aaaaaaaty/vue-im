@@ -21,21 +21,28 @@ router.map({
     component: User,
     subRoutes: {
       '/alivelist': {
-        component: AliveList
+        component: AliveList,
+        subRoutes: {
+          'talk': {
+            component: Talk
+          }
+        }
       },
       '/account': {
         component: Account
       },
       '/userlist': {
-        component: UserList
+        component: UserList,
+        subRoutes: {
+          '/talk': {
+            component: Talk
+          }
+        }
       },
       '/new': {
         component: New
       }
     }
-  },
-  '/talk/:username': {
-    component: Talk
   }
 })
 router.start(App, '#app')

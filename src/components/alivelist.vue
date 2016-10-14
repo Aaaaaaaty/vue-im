@@ -1,6 +1,4 @@
 <template>
-  <div id="nav">biu</div>
-  <h1>account</h1>
 </template>
 
 <script>
