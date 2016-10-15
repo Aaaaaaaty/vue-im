@@ -15,14 +15,18 @@
 }
                     
 
-
+body {
+  font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-weight: 400;
+}
 
 // color
 $black: rgba(0, 0, 0, 1);
 $background-color: #2e3238;
 $gray: #9b9b9b;
 $gray-light: #ccc;
-$gray-bg: #f7f7f7;
+$gray-bg: #eee;
+// $gray-bg: #f7f7f7;
 $gray-field: #e4e4e4;
 $gray-holder: rgba(123, 135, 146, 1);
 $green: #0AA082;

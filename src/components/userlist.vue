@@ -5,6 +5,7 @@
         <div class="user-img"></div>
         <div class="user-name">
           {{user}}
+          <p class="user-ext">12:13</p>
           <p class="user-msg"></p>
         </div>
       </div>
@@ -85,6 +86,14 @@ import CHAT from '../client'
           font-size: 13px;
           color: #FFF;
           line-height: 20px;
+          .user-ext {
+            float: right;
+            color: $white;
+            font-size: 13px;
+            text-align: right;
+            height: 19px;
+            line-height: 1.5;
+          }
           .user-msg {
             font-size: 13px;
             width: 100%;

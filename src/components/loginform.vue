@@ -40,7 +40,7 @@ export default {
         if(result.status === 'OK') {
           this.userLogin(username)
           // CHAT.init(username)
-          this.$router.go('/user/alivelist')
+          this.$router.go('/user/userlist/noconnect')
         } else {
           alert(result.msg)
         }

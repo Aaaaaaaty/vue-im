@@ -1,13 +1,114 @@
 <template>
+  <div class="user-list">
+    <div class="user-content">
+      <div class="user-item" track-by="$index" v-for="user in userList" @click="startTalk">
+        <div class="user-img"></div>
+        <div class="user-name">
+          {{user}}
+          <p class="user-ext">12:13</p>
+          <p class="user-msg"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <router-view keep-alive></router-view>
 </template>
 
 <script>
+import { getLoginId } from '../vuex/getters'
+import settings from '../settings.js'
+import CHAT from '../client'
   export default {
-  
+    data: function() {
+      return {
+        userList: ['an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup','an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup']
+      }
+    },
+    methods: {
+      startTalk: function(e) {
+      //   var text = e.target.innerText
+      //   CHAT.init(this.loginId)
+        this.$router.go({
+          path: '/user/userlist/talk/'
+        })
+      },
+    },
+    ready: function() { 
+      this.$http.post(settings.server+'/getUser', { username: this.loginId }).then((res) => {
+        var userList = res.body
+        this.userList = userList.data.user.friendslist
+      })
+    },
+    router:{
+      canReuse: true
+    },
+    vuex: {
+      getters: {
+        loginId: getLoginId
+      }
+    },
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
   @import '../utils/utils.scss';
+  .user-list {
+    // display: block;
+    position: absolute;
+    top: 154px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 280px;
+    background-color: $background-color;
+    overflow-y: scroll;
+    .user-content {
+      height: 100%;
+      .user-item {
+        overflow: hidden;
+        padding: 12px 18px 11px;
+        border-bottom: 1px solid #292C33;
+        cursor: pointer;
+        position: relative;
+        color: $white;
+        .user-img {
+          float: left;
+          margin-right: 10px;
+          position: relative;
+          width: 40px;
+          height: 40px;
+          background-color: $gray;
+        }
+        .user-name {
+          overflow: hidden;
+          font-weight: 400;
+          font-size: 13px;
+          color: #FFF;
+          line-height: 20px;
+          .user-ext {
+            float: right;
+            color: $white;
+            font-size: 13px;
+            text-align: right;
+            height: 19px;
+            line-height: 1.5;
+          }
+          .user-msg {
+            font-size: 13px;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: normal;
+            height: 1.5em;
+          }
+        }
+      }
+    }
+  }
+  .user-list::-webkit-scrollbar {
+    width:0px
+  }
+  
 </style>

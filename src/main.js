@@ -9,6 +9,7 @@ import Account from './components/account'
 import UserList from './components/userlist'
 import New from './components/new'
 import Talk from './components/talk'
+import Noconnect from './components/noconnect'
 // 定义组件
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -36,6 +37,9 @@ router.map({
         subRoutes: {
           '/talk': {
             component: Talk
+          },
+          '/noconnect': {
+            component: Noconnect
           }
         }
       },

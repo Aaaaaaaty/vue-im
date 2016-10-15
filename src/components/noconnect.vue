@@ -4,36 +4,14 @@
       <div class="talk-nav">
         <!--{{$route.params.username}}-->
         <div class="talk-title">
-          An
         </div>
       </div>
       <div class="content">
-        <div v-for="msgObj in CHAT.msgArr" track-by="$index">
-          <div  class="talk-space self-talk" 
-                v-if="CHAT.msgArr[$index].fromUser == username && CHAT.msgArr[$index].toUser == $route.params.username" 
-                track-by="$index">
-            <div class="talk-content">
-              <div class="talk-word talk-word-self">{{msgObj.msg}}</div><i class="swip"></i>
-            </div>
-          </div>
-          <div  class="talk-space user-talk" 
-                v-if="CHAT.msgArr[$index].toUser == username && CHAT.msgArr[$index].fromUser == $route.params.username"
-                track-by="$index">
-            <div class="talk-content">
-              <div class="talk-word talk-word-user">{{msgObj.msg}}<i class="swip-user"></i></div>
-            </div>
-          </div>
-        </div>
+        <i class="content-empty"></i>
+        <p>未选择聊天</p>
       </div>
       <div class="talker">
-        <div class="talker-toolbar">
-          <a class="talker-face"></a>
-        </div>
-        <textarea class="talker-input" type="text" v-model="msg" placeholder="Type your message.."></textarea>
-        <div class="action">
-          <span class="talker-tip">按下Cmd+Enter换行</span>
-          <span class="talker-send" @click="submit">发送</span> 
-        </div>
+       
       </div>
     </div>
   </div>
@@ -96,9 +74,10 @@ export default {
         top: 0;
         left: 0;
         right: 0;
-        line-height: 30px;
         .talk-title {
           position: relative;
+          line-height: 30px;
+          height: 30px;
           padding: 10px 0;
           margin: 0 19px;
           border-bottom: 1px solid #d6d6d6;
@@ -115,13 +94,24 @@ export default {
         top: 51px;
         right: 0;
         left: 0;
+        text-align: center;
+        padding-top: 130px;
+        color: #ccc;
+        font-size: 13px;
+        i {
+          background: url('https://res.wx.qq.com/zh_CN/htmledition/v2/images/icon/sprite@2x308b49.png') 0 -1332px;
+          width: 100px;
+          height: 90px;
+          vertical-align: middle;
+          display: inline-block;
+          background-size: 150px 2489px;
+        }
       }
       .talker {
         background-color: #eee;
         height: 180px;
         margin-left: 280px;
         padding-right: 19px;
-        border-top: 1px solid #d6d6d6;
         position: absolute;
         right: 0;
         bottom: 0;
