@@ -87,7 +87,6 @@ export default {
     margin-left: 280px;
     
     .talk-inner {
-
       .talk-nav {
         background-color: $gray-bg;
         margin-left: 280px;
