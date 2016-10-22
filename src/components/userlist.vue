@@ -26,8 +26,8 @@ import CHAT from '../client'
     },
     methods: {
       startTalk: function(e) {
-        var text = e.currentTarget.className
-        console.log(this.$el)
+        var text = e.currentTarget
+        console.log(text.childNodes)
       //   CHAT.init(this.loginId)
         this.$router.go({
           path: '/user/userlist/talk/'

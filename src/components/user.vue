@@ -8,13 +8,13 @@
     <ul id="footer">
       <li class="footer-nav" 
           id="alivelist" 
-          v-link="{path: '/user/userlist', activeClass: 'active'}" 
+          v-link="{path: '/user/userlist/noconnect', activeClass: 'active'}" 
           >
         <i class="iconfont" >&#xe600</i>
       </li>
       <li class="footer-nav" 
           id="userlist" 
-          v-link="{path: '/user/alivelist', activeClass: 'active'}"
+          v-link="{path: '/user/alivelist/noperson', activeClass: 'active'}"
           >
         <i class="iconfont" id="alivelist" >&#xe603</i>
       </li>
