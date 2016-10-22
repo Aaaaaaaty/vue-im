@@ -1,12 +1,10 @@
 <template>
-  <div class="user-list">
-    <div class="user-content">
-      <div class="user-item" track-by="$index" v-for="user in userList" @click="startTalk">
-        <div class="user-img"></div>
-        <div class="user-name">
-          {{user}}
-          <p class="user-ext">12:13</p>
-          <p class="user-msg"></p>
+  <div class="alive-list">
+    <div class="alive-content">
+      <div class="alive-item" track-by="$index" v-for="alive in aliveList" @click="startTalk">
+        <div class="alive-img"></div>
+        <div class="alive-name">
+          {{alive}}
         </div>
       </div>
     </div>
@@ -21,7 +19,7 @@ import CHAT from '../client'
   export default {
     data: function() {
       return {
-        userList: ['an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup','an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup']
+        aliveList: ['an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup','an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup']
       }
     },
     methods: {
@@ -29,7 +27,7 @@ import CHAT from '../client'
       //   var text = e.target.innerText
       //   CHAT.init(this.loginId)
         this.$router.go({
-          path: '/user/userlist/talk/'
+          path: '/user/alivelist/info'
         })
       },
     },
@@ -53,7 +51,7 @@ import CHAT from '../client'
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
   @import '../utils/utils.scss';
-  .user-list {
+  .alive-list {
     // display: block;
     position: absolute;
     top: 154px;
@@ -63,16 +61,16 @@ import CHAT from '../client'
     width: 280px;
     background-color: $background-color;
     overflow-y: scroll;
-    .user-content {
+    .alive-content {
       height: 100%;
-      .user-item {
+      .alive-item {
         overflow: hidden;
-        padding: 12px 18px 11px;
+        padding: 10px 18px 9px;
         border-bottom: 1px solid #292C33;
         cursor: pointer;
         position: relative;
         color: $white;
-        .user-img {
+        .alive-img {
           float: left;
           margin-right: 10px;
           position: relative;
@@ -80,34 +78,17 @@ import CHAT from '../client'
           height: 40px;
           background-color: $gray;
         }
-        .user-name {
+        .alive-name {
           overflow: hidden;
           font-weight: 400;
           font-size: 13px;
           color: #FFF;
           line-height: 20px;
-          .user-ext {
-            float: right;
-            color: $white;
-            font-size: 13px;
-            text-align: right;
-            height: 19px;
-            line-height: 1.5;
-          }
-          .user-msg {
-            font-size: 13px;
-            width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            word-wrap: normal;
-            height: 1.5em;
-          }
         }
       }
     }
   }
-  .user-list::-webkit-scrollbar {
+  .alive-list::-webkit-scrollbar {
     width:0px
   }
   

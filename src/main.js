@@ -11,6 +11,7 @@ import New from './components/new'
 import Talk from './components/talk'
 import Noconnect from './components/noconnect'
 import Noperson from './components/noperson'
+import Info from './components/info'
 
 // 定义组件
 Vue.use(VueRouter)
@@ -31,6 +32,9 @@ router.map({
           },
           '/noperson': {
             component: Noperson
+          },
+          '/info': {
+            component: Info
           }
         }
       },
