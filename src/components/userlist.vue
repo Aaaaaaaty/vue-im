@@ -1,10 +1,14 @@
 <template>
   <div class="user-list">
     <div class="user-content">
-      <div class="user-item" track-by="$index" v-for="user in userList" @click="startTalk">
+      <div  class="user-item" 
+            track-by="$index" 
+            v-for="user in userList" 
+            @click="startTalk"
+            >
         <div class="user-img"></div>
         <div class="user-name">
-          {{user}}
+          <span class="user-user">{{user}}</span>
           <p class="user-ext">12:13</p>
           <p class="user-msg"></p>
         </div>
@@ -21,14 +25,13 @@ import CHAT from '../client'
   export default {
     data: function() {
       return {
-        userList: ['an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup','an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup']
+        userList: ['an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup','an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup'],
       }
     },
     methods: {
       startTalk: function(e) {
         var text = e.currentTarget
-        console.log(text.childNodes)
-      //   CHAT.init(this.loginId)
+        var getUserName = text.querySelector('.user-user').innerHTML
         this.$router.go({
           path: '/user/userlist/talk/'
         })
