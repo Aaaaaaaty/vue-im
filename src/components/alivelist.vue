@@ -1,11 +1,14 @@
 <template>
   <div class="alive-list">
     <div class="alive-content">
-      <div class="alive-item" track-by="$index" v-for="alive in aliveList" @click="startTalk">
-        <div class="alive-img"></div>
-        <div class="alive-name">
-          {{alive}}
+      <div track-by="$index" v-for="alive in aliveList" @click="startTalk">
+        <div v-if="alive.type == 'person'" class="alive-item">
+          <div  class="alive-name">
+            <div class="alive-img"></div>
+              {{alive.username}}
+          </div>
         </div>
+        <div v-else class="alive-sym">{{alive}}</div>
       </div>
     </div>
   </div>
@@ -20,7 +23,7 @@ import pinyin from 'pinyin'
   export default {
     data: function() {
       return {
-        aliveList: ['an', '赵康帅', 'Zks', 'ltn', '菜虫', 'lby', '杨宏睿', 'zxx', 'jg', '戴诚', 'sup','an', 'admin', 'zks', 'ltn', 'cc', 'lby', '林天南', 'zxx', '安凯', 'adc', 'sup']
+        aliveList: []
       }
     },
     methods: {
@@ -35,11 +38,7 @@ import pinyin from 'pinyin'
     },
     ready: function() { 
       this.$http.post(settings.server+'/getUser', { username: this.loginId }).then((res) => {
-        var userList = res.body
-        var friendslist = []
-        userList.data.user.map((item, index) => {
-          friendslist.push(item.username)
-        })
+        var friendslist = res.body.data.user
         //quickSort为快速排序
         var quickSort = function(arr) {
           if (arr.length <= 1) { return arr; }
@@ -48,7 +47,7 @@ import pinyin from 'pinyin'
           var left = []
           var right = []
           for (var i = 0; i < arr.length; i++){
-          if (pinyin(arr[i], {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toLowerCase() < pinyin(pivot, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toLowerCase()) {
+          if (pinyin(arr[i].username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toLowerCase() <= pinyin(pivot.username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toLowerCase()) {
             left.push(arr[i])
           } else {
             right.push(arr[i])
@@ -56,7 +55,34 @@ import pinyin from 'pinyin'
         }
           return quickSort(left).concat([pivot], quickSort(right))
         }
-        this.aliveList = quickSort(friendslist)
+        var addSymList = function(arr) { //添加字母分隔符
+          var findSym = 'A'
+          var status = false
+          var addedList = []
+          arr.map((item, index) => {
+            console.log(item.username)
+            if(pinyin(item.username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toUpperCase() == findSym) {
+              if(!status) {
+                console.log(pinyin(item.username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0))
+                addedList.push(findSym)
+                addedList.push(item)
+                status = true
+              } else {
+                addedList.push(item)
+              }
+              
+              
+            } else {
+              // status = false
+              console.log(pinyin(item.username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0))
+              findSym = pinyin(item.username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toUpperCase()
+              addedList.push(findSym)
+              addedList.push(item)
+            }
+          })
+          return addedList
+        }
+        this.aliveList = addSymList(quickSort(friendslist))
         console.log(this.aliveList)
       })
     },
@@ -108,6 +134,14 @@ import pinyin from 'pinyin'
           color: #FFF;
           line-height: 20px;
         }
+      }
+      .alive-sym {
+        margin: 0;
+        padding: 1px 18px;
+        font-weight: 400;
+        color: #787b87;
+        background: #292d32;
+        font-size: 14px;
       }
     }
   }
