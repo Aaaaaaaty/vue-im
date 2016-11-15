@@ -8,3 +8,7 @@ export const userLogin = function ({ dispatch, state }, _id) {
   dispatch('login', _id)
   // dispatch('login', user)
 }
+
+export const talkUserName = function( {dispatch, state }, userName) {
+	dispatch('talkUserName', userName)
+} 

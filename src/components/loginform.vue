@@ -33,13 +33,12 @@ export default {
         username: this.user,
         password: this.psd
       }
-      console.log(settings.server)
       this.$http.post(settings.server+'/login', user).then((res) => {
         var result = res.body
         var username = result.data.user.username
         if(result.status === 'OK') {
           this.userLogin(username)
-          // CHAT.init(username)
+          CHAT.init(username)
           this.$router.go('/user/userlist/noconnect')
         } else {
           alert(result.msg)

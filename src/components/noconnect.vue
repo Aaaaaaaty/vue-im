@@ -42,7 +42,7 @@ export default {
       CHAT.scrollToBottom()
     },
     wait: function() {
-      CHAT.message(this.loginId)
+      // CHAT.message(this.loginId)
     }
   },
   ready: function() {

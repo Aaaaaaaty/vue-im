@@ -5,3 +5,8 @@
 export function getLoginId (state) {
   return state.loginId
 }
+
+export function getUserName (state) {
+  console.log(state.userName)
+  return state.userName
+}

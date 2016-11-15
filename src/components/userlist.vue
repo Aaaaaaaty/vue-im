@@ -25,19 +25,21 @@ import CHAT from '../client'
   export default {
     data: function() {
       return {
-        userList: ['an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup','an', 'admin', 'zks', 'ltn', 'cc', 'lby', 'yhr', 'zxx', 'jg', 'adc', 'sup'],
+        userList: [],
       }
     },
     methods: {
       startTalk: function(e) {
         var text = e.currentTarget
-        var getUserName = text.querySelector('.user-user').innerHTML
+        var userName = text.querySelector('.user-user').innerHTML
         this.$router.go({
-          path: '/user/userlist/talk/'
+          path: '/user/userlist/talk/',
+          query: {username: userName}
         })
       },
     },
     ready: function() { 
+      console.log(this.loginId)
       this.$http.post(settings.server+'/getUser', { username: this.loginId }).then((res) => {
         var userList = res.body
         this.userList = userList.data.user.friendslist
@@ -50,7 +52,7 @@ import CHAT from '../client'
       getters: {
         loginId: getLoginId
       }
-    },
+    }
   }
 </script>
 

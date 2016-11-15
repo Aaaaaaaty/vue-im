@@ -4,12 +4,16 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  loginId: ''
+  loginId: '',
+  userName: ''
 }
 
 const mutations = {
   login (state, _id) {
     state.loginId = _id
+  },
+  talkUserName(state, _username) {
+  	state.userName = _username
   }
 }
 
