@@ -42,7 +42,11 @@ import CHAT from '../client'
       console.log(this.loginId)
       this.$http.post(settings.server+'/getUser', { username: this.loginId }).then((res) => {
         var userList = res.body
-        this.userList = userList.data.user.friendslist
+        var friendslist = []
+        userList.data.user.map((item, index) => {
+          friendslist.push(item.username)
+        })
+        this.userList = friendslist
       })
     },
     router:{
