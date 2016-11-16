@@ -60,21 +60,15 @@ import pinyin from 'pinyin'
           var status = false
           var addedList = []
           arr.map((item, index) => {
-            console.log(item.username)
             if(pinyin(item.username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toUpperCase() == findSym) {
               if(!status) {
-                console.log(pinyin(item.username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0))
                 addedList.push(findSym)
                 addedList.push(item)
                 status = true
               } else {
                 addedList.push(item)
               }
-              
-              
             } else {
-              // status = false
-              console.log(pinyin(item.username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0))
               findSym = pinyin(item.username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toUpperCase()
               addedList.push(findSym)
               addedList.push(item)
@@ -83,7 +77,6 @@ import pinyin from 'pinyin'
           return addedList
         }
         this.aliveList = addSymList(quickSort(friendslist))
-        console.log(this.aliveList)
       })
     },
     router:{
