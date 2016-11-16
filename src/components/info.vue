@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { addUserList } from '../vuex/actions'
+import vuex from 'vuex'
 export default {
   data: function() {
     return {}
@@ -31,11 +33,17 @@ export default {
   methods: {
     submit: function(e){
       e.preventDefault()
+      this.addUserList(this.$route.query.username)
       this.$router.go({
           path: '/user/userlist/talk/',
           query: {username: this.$route.query.username}
       })
     },
+  },
+  vuex: {
+    actions: {
+      addUserList: addUserList
+    }
   }
 }
 </script>

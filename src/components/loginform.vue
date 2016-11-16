@@ -46,6 +46,13 @@ export default {
       })
     },
   },
+  ready: function() {
+    document.onkeydown = (e) => {
+      if(e && e.keyCode == 13) {
+        this.login()
+      }
+    }
+  },
   vuex: {
     actions: {
       userLogin: userLogin

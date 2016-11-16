@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 const state = {
   loginId: '',
-  userName: ''
+  userName: '',
+  userList: []
 }
 
 const mutations = {
@@ -14,6 +15,9 @@ const mutations = {
   },
   talkUserName(state, _username) {
   	state.userName = _username
+  },
+  addUserList(state, _username) {
+    state.userList.unshift(_username)
   }
 }
 

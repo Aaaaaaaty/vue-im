@@ -10,3 +10,8 @@ export function getUserName (state) {
   console.log(state.userName)
   return state.userName
 }
+
+export function addUserList (state) {
+	console.log(state.userList)
+	return state.userList
+}

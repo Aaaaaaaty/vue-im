@@ -213,7 +213,7 @@ export default {
           border-color: #da2b65 transparent transparent;
           margin: 40px auto;
           position: absolute;
-          bottom: -50px;
+          bottom: -47px;
           right: 10px;
           z-index: 1;
         }

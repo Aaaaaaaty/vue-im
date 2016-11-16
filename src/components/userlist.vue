@@ -9,7 +9,7 @@
         <div class="user-img"></div>
         <div class="user-name">
           <span class="user-user">{{user}}</span>
-          <p class="user-ext">12:13</p>
+          <p class="user-ext">{{time}}</p>
           <p class="user-msg"></p>
         </div>
       </div>
@@ -19,13 +19,14 @@
 </template>
 
 <script>
-import { getLoginId } from '../vuex/getters'
+import { getLoginId, addUserList } from '../vuex/getters'
 import settings from '../settings.js'
 import CHAT from '../client'
   export default {
     data: function() {
       return {
         userList: [],
+        isActive: []
       }
     },
     methods: {
@@ -39,21 +40,15 @@ import CHAT from '../client'
       },
     },
     ready: function() { 
-      // this.$http.post(settings.server+'/getUser', { username: this.loginId }).then((res) => {
-      //   var userList = res.body
-      //   var friendslist = []
-      //   userList.data.user.map((item, index) => {
-      //     friendslist.push(item.username)
-      //   })
-      //   this.userList = friendslist
-      // })
+      this.userList = this.addUserList
     },
     router:{
       canReuse: true
     },
     vuex: {
       getters: {
-        loginId: getLoginId
+        loginId: getLoginId,
+        addUserList: addUserList
       }
     }
   }
@@ -74,6 +69,9 @@ import CHAT from '../client'
     overflow-y: scroll;
     .user-content {
       height: 100%;
+      .active {
+        background: #3A3F45;
+      }
       .user-item {
         overflow: hidden;
         padding: 12px 18px 11px;

@@ -12,3 +12,7 @@ export const userLogin = function ({ dispatch, state }, _id) {
 export const talkUserName = function( {dispatch, state }, userName) {
 	dispatch('talkUserName', userName)
 } 
+
+export const addUserList = function( {dispatch, state }, userName) {
+	dispatch('addUserList', userName)
+}
