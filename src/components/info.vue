@@ -16,7 +16,7 @@
         <p class="profile-text">控制自己，掌控别人</p>
         <div class="profile-meta"></div>
         <div class="profile-submit">
-          <a href="#" class="button">发消息</a>
+          <a class="button" @click="submit">发消息</a>
         </div>
       </div>
     </div>
@@ -24,41 +24,18 @@
 </template>
 
 <script>
-import { getLoginId } from '../vuex/getters'
-import io from 'socket.io-client'
-import CHAT from '../client'
 export default {
   data: function() {
-    return {
-      msg:'',
-      message: [1,2],
-      CHAT,
-      username: ''
-    }
+    return {}
   },
   methods: {
-    submit: function(){
-      var obj = {
-        msg: this.msg,
-        toUser: this.$route.params.username,
-        fromUser: this.loginId
-      }
-      this.msg = ''
-      CHAT.submit(obj)
-      CHAT.scrollToBottom()
+    submit: function(e){
+      e.preventDefault()
+      this.$router.go({
+          path: '/user/userlist/talk/',
+          query: {username: this.$route.query.username}
+      })
     },
-    wait: function() {
-      CHAT.message(this.loginId)
-    }
-  },
-  ready: function() {
-    this.wait()
-    this.username = this.loginId
-  },
-  vuex: {
-    getters: {
-      loginId: getLoginId
-    }
   }
 }
 </script>
@@ -69,9 +46,7 @@ export default {
   .talk-content {
     height: 100%;
     margin-left: 280px;
-    
     .talk-inner {
-
       .talk-nav {
         background-color: $gray-bg;
         margin-left: 280px;

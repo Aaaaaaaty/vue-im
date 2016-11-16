@@ -71,9 +71,9 @@ const CHAT={
   },
   message: function(username) {
       console.log('waiting..')
-      console.log(this.socket)
+      var i = 0
       this.socket.on('to' + username, function(obj) {
-        console.log(obj)
+        i++
         CHAT.msgArr.push(obj)
       })    
   },

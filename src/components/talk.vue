@@ -68,7 +68,7 @@ export default {
     }
   },
   ready: function() {
-    this.wait()
+    // this.wait()
     this.username = this.loginId
   },
   vuex: {
