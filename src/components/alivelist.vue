@@ -29,10 +29,10 @@ import pinyin from 'pinyin'
     methods: {
       startTalk: function(e) {
         var text = e.currentTarget
-        var userName = text.querySelector('.alive-name').innerHTML
+        var userName = text.querySelector('.alive-name').innerText
         this.$router.go({
           path: '/user/alivelist/info',
-          query: {username: userName}
+          query: { username: userName }
         })
       },
     },

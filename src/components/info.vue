@@ -2,16 +2,22 @@
   <div class="talk-content">
     <div class="talk-inner">
       <div class="talk-nav">
-        <!--{{$route.params.username}}-->
         <div class="talk-title">
+          <span>详细信息</span>
         </div>
       </div>
       <div class="content">
-        <i class="content-empty"></i>
-        <p>未选择联系人1111</p>
-      </div>
-      <div class="talker">
-       
+        <div class="avatar">
+          <div></div>    
+        </div>
+        <div class="profile-name">
+          <h4>{{$route.query.username}}</h4>
+        </div>
+        <p class="profile-text">控制自己，掌控别人</p>
+        <div class="profile-meta"></div>
+        <div class="profile-submit">
+          <a href="#" class="button">发消息</a>
+        </div>
       </div>
     </div>
   </div>
@@ -83,209 +89,70 @@ export default {
           border-bottom: 1px solid #d6d6d6;
           background-color: $gray-bg;
           z-index: 1024;
+            span {
+              height: 25px;
+              font-size: 14px;
+              font-weight: 400;
+            }
         }
       }
       .content {
         background-color: $gray-bg;
         position: absolute;
-        bottom: 180px;
+        bottom: 0px;
         padding: 0 19px;
         margin-left: 280px;
         top: 51px;
         right: 0;
         left: 0;
         text-align: center;
-        padding-top: 130px;
+        padding-top: 80px;
         color: #ccc;
         font-size: 13px;
-        i {
-          background: url('https://res.wx.qq.com/zh_CN/htmledition/v2/images/icon/sprite@2x308b49.png') 0 -1332px;
-          width: 100px;
-          height: 90px;
-          vertical-align: middle;
-          display: inline-block;
-          background-size: 150px 2489px;
-        }
-      }
-      .talker {
-        background-color: #eee;
-        height: 180px;
-        margin-left: 280px;
-        padding-right: 19px;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        .talker-toolbar {
-          height: 30px;
-          padding: 5px 17px;
-          .talker-face {
-            background: url('https://res.wx.qq.com/zh_CN/htmledition/v2/images/icon/sprite@2x308b49.png') 0 -805px;
-            width: 30px;
-            height: 30px;
-            vertical-align: middle;
-            display: inline-block;
-            background-size: 150px 2489px;
-          }
-        }
-        .talker-input {
-          height: 6em;
-          width: 100%;
-          overflow-y: auto;
-          overflow-x: hidden;
-          padding-left: 20px;
-          outline: 0;
-          border: 0;
-          font-size: 14px;
-          background-color: #eee;
-          resize:none;
-        }
-        .action {
-          text-align: right;
-          margin-top: 5px;
-          .talker-tip {
-            color: #888;
-            font-size: 12px;
-            margin-left: 10px;
-            margin-right: 7px;
-          }
-          .talker-send {
-            background-color: #fff;
-            color: #222;
-            padding: 3px 30px;
-            display: inline-block;
-            border: 1px solid #c1c1c1;
+        .avatar {
+          margin-bottom: 20px;
+          div {
+            display: block;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
             border-radius: 4px;
             -moz-border-radius: 4px;
             -webkit-border-radius: 4px;
+            background-color: white;
+          }
+        }
+        .profile-name {
+          h4 {
+            font-weight: 400;
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: inline-block;
+            color: black;
+          }
+        }
+        .profile-text {
+          font-size: 14px;
+          color: #888;
+        }
+        .profile-submit {
+          .button{
+            display: inline-block;
+            margin-top: 40px;
+            width: 200px;
+            text-align: center;
+            color: #fff;
+            line-height: 40px;
+            background-color: #42AC3E;
             font-size: 14px;
-            line-height: 1.6;
+            text-decoration: none;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
           }
         }
       }
     }
-    
-    // .content {
-    //   .talk-space {
-    //     width: 100%;
-    //     margin-bottom: 16px;
-    //     .talk-word {
-    //       display: inline-block;
-    //       position: relative;
-    //       background: -webkit-linear-gradient(left top, $left-red, $right-red); /* Safari 5.1 - 6.0 */
-    //       color: $white;
-    //       max-width: 60%;
-    //       min-height: 25px;
-    //       line-height: 25px;
-    //       margin: 0 1%;
-    //       padding: 4px 12px 2px 11px;
-    //       border-radius: 5px;
-    //       font-size: 12px;
-    //       word-break: break-all;
-    //     }
-    //     .talk-word-self {
-    //       border-bottom-right-radius: 0px;
-    //       margin-right: 10px;
-    //       text-align: left;
-    //     }
-    //     .talk-word-user {
-    //       background: none;
-    //       background-color: rgba(243,243,243,1);
-    //       color: $black;
-    //       border-bottom-left-radius: 0px;
-    //       margin-left: 10px;
-    //       text-align: right;
-    //     }
-    //     .swip {
-    //       width: 0;
-    //       height: 0;
-    //       border-width: 10px 0px 0px 7px;
-    //       border-style: solid;
-    //       border-color: #da2b65 transparent transparent;
-    //       margin: 40px auto;
-    //       position: absolute;
-    //       bottom: -50px;
-    //       right: 10px;
-    //       z-index: 1;
-    //     }
-    //     .swip-user {
-    //       width: 0;
-    //       height: 0;
-    //       border-width: 10px 8px 0px 0px;
-    //       border-style: solid;
-    //       border-color: rgba(243,243,243,1) transparent transparent;
-    //       margin: 40px auto;
-    //       position: absolute;
-    //       bottom: -50px;
-    //       left: 0px;
-    //       z-index: 1;
-    //     }
-    //   }
-    //   .self-talk {
-    //     margin-top: 10px;
-    //     .talk-img {
-    //       float: right;
-    //       width: auto;
-    //     }
-    //     .talk-content {
-    //       text-align: right;
-    //       position: relative;
-    //     }
-    //   }
-    //   .user-talk {
-    //     margin-top: 10px;
-    //     .talk-img {
-    //       float: left;
-    //       width: auto;
-    //     }
-    //     .talk-content {
-    //       text-align: left;
-    //       position: relative;
-    //     }
-    //   }
-    // }
-    // .talker {
-    //   position: fixed;
-    //   z-index: 3;
-    //   bottom: 0;
-    //   // width: 100%;
-    //   height: 40px;
-    //   .talker-input {
-    //     position: absolute;
-    //     z-index: 20;
-    //     border: none;
-    //     height: 100%;
-    //     outline: medium;
-    //     // width: 97%;
-    //     padding-top: 10px;
-    //     padding-left: 10px;
-    //     padding-right: 10px;
-    //     box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.08);
-    //   }
-    //   .talker-send {
-    //     position: absolute;
-    //     z-index: 30;
-    //     border-radius: 33px;
-    //     width: 16px;
-    //     top: -24px;
-    //     left: 82%;
-    //     padding: 15px;
-    //     text-align: center; 
-    //     font-size: 14px;
-    //     background: -webkit-linear-gradient(left top, $left-red, $right-red);
-    //     color: $white;
-    //     text-decoration: none;
-    //     box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.3);
-    //   }
-    // }
-    // .iconfont {
-    //   font-family: "iconfont";
-    //   font-size: 24px;
-    //   font-style: normal;
-    //   position: absolute;
-    //   left: 60%;
-    //   top: 17%;
-    // }
   }
   
 </style>
