@@ -1,5 +1,5 @@
 <template>
-  <div class="talk-content">
+  <div class="talk-contents">
     <div class="talk-inner">
       <div class="talk-nav">
         <!--{{$route.query.username}}-->
@@ -41,39 +41,48 @@
 
 <script>
 import { getLoginId } from '../vuex/getters'
+import { addUserList } from '../vuex/actions'
+import vuex from 'vuex'
 import io from 'socket.io-client'
 import CHAT from '../client'
 export default {
   data: function() {
     return {
       msg:'',
-      message: [1,2],
       CHAT,
       username: ''
     }
   },
   methods: {
     submit: function(){
+      var date = new Date()
+      var time = date.getHours() + ':' + date.getMinutes()
       var obj = {
+        time: time,
         msg: this.msg,
         toUser: this.$route.query.username,
         fromUser: this.loginId
       }
+      var user = {
+        time: time,
+        lastMsg: this.msg,
+        username: this.$route.query.username
+      }
+      this.addUserList(user)
       this.msg = ''
       CHAT.submit(obj)
       CHAT.scrollToBottom()
     },
-    wait: function() {
-      CHAT.message(this.loginId)
-    }
   },
   ready: function() {
-    // this.wait()
     this.username = this.loginId
   },
   vuex: {
     getters: {
       loginId: getLoginId
+    },
+    actions: {
+      addUserList: addUserList
     }
   }
 }
@@ -82,7 +91,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
   @import '../utils/utils.scss';
-  .talk-content {
+  .talk-contents {
     height: 100%;
     margin-left: 280px;
     

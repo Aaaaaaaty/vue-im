@@ -15,3 +15,7 @@ export function addUserList (state) {
 	console.log(state.userList)
 	return state.userList
 }
+
+export function getTime (state) {
+	return state.time
+}

@@ -13,6 +13,10 @@ export const talkUserName = function( {dispatch, state }, userName) {
 	dispatch('talkUserName', userName)
 } 
 
-export const addUserList = function( {dispatch, state }, userName) {
-	dispatch('addUserList', userName)
+export const addUserList = function( {dispatch, state }, user) {
+	dispatch('addUserList', user)
+}
+
+export const setTime = function( {dispatch, state }, time) {
+	dispatch('setTime', time)
 }

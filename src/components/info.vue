@@ -33,7 +33,12 @@ export default {
   methods: {
     submit: function(e){
       e.preventDefault()
-      this.addUserList(this.$route.query.username)
+      var user = {
+        time: '',
+        lastMsg: '',
+        username: this.$route.query.username
+      }
+      this.addUserList(user)
       this.$router.go({
           path: '/user/userlist/talk/',
           query: {username: this.$route.query.username}

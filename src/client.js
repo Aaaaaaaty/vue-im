@@ -83,7 +83,6 @@ const CHAT={
     this.socket.on('open', function() {
       console.log('已连接')
     })
-    console.log(this.socket.id)
     // console.log(toUser, fromUser)
     this.socket.emit('addUser', username)
     //告诉服务器端有用户登录

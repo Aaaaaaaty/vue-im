@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const state = {
   loginId: '',
   userName: '',
-  userList: []
+  userList: [],
 }
 
 const mutations = {
@@ -16,8 +16,22 @@ const mutations = {
   talkUserName(state, _username) {
   	state.userName = _username
   },
-  addUserList(state, _username) {
-    state.userList.unshift(_username)
+  addUserList(state, _user) {
+    var status = false
+    state.userList.map((item, index) => {
+      if(item.username == _user.username) {
+        item = _user
+        status = true
+        state.userList.splice(index, 1)
+        state.userList.unshift(item)
+      }
+    })
+    if(!status) {
+      state.userList.unshift(_user)
+    }
+  },
+  setTime(state, _time) {
+    state.time = _time
   }
 }
 

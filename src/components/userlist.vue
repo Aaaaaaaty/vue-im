@@ -8,9 +8,9 @@
             >
         <div class="user-img"></div>
         <div class="user-name">
-          <span class="user-user">{{user}}</span>
-          <p class="user-ext">{{time}}</p>
-          <p class="user-msg"></p>
+          <span class="user-user">{{user.username}}</span>
+          <p class="user-ext">{{user.time}}</p>
+          <p class="user-msg">{{user.lastMsg}}</p>
         </div>
       </div>
     </div>
@@ -26,7 +26,6 @@ import CHAT from '../client'
     data: function() {
       return {
         userList: [],
-        isActive: []
       }
     },
     methods: {
@@ -102,7 +101,8 @@ import CHAT from '../client'
             line-height: 1.5;
           }
           .user-msg {
-            font-size: 13px;
+            font-size: 12px;
+            color: gray;
             width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
