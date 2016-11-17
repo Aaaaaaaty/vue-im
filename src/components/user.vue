@@ -1,6 +1,14 @@
 <template>
   <div class="user-info">
-    <div class="user-name">An</div>
+    <div class="user-name">
+      <div class="user-avatar">
+        <div class="img"></div>
+      </div>
+      <div class="user-nickname">
+        <span>An</span>
+        <i></i>
+      </div>
+    </div>
     <div class="user-setting"></div>
     <div class="user-search">
       <input type="text">
@@ -61,6 +69,53 @@
       height: 40px;
       padding: 18px;
       background-color: $background-color;
+      .user-avatar {
+        display: table-cell;
+        vertical-align: middle;
+        word-wrap: break-word;
+        word-break: break-all;
+        white-space: nowrap;
+        padding-right: 10.625px;
+        .img {
+          width: 40px;
+          height: 40px;
+          background-color: #fff;
+          border-radius: 2px;
+          -moz-border-radius: 2px;
+          -webkit-border-radius: 2px;
+          display: inline-block;
+          cursor: pointer;
+        }
+      }
+      .user-nickname {
+        display: table-cell;
+        vertical-align: middle;
+        word-wrap: break-word;
+        word-break: break-all;
+        width: 2000px;
+        span {
+          display: inline-block;
+          font-weight: 400;
+          width: 156px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          word-wrap: normal;
+          color: #fff;
+          font-size: 18px;
+          vertical-align: top;
+          line-height: 31px;
+          text-decoration: none;
+        }
+        i {
+          background: url(http://res.wx.qq.com/zh_CN/htmledition/v2/images/icon/sprite31b57c.png) 0 -406px;
+          width: 30px;
+          height: 30px;
+          vertical-align: middle;
+          display: inline-block;
+          cursor: pointer;
+        }
+      }
     }
     .user-search {
       width: 244px;
