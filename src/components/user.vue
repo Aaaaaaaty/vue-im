@@ -3,14 +3,6 @@
     <div class="user-name">
       <div class="user-avatar">
         <img src="http://vueim-10073389.image.myqcloud.com//u/can/use/slash/sample1479377386" class="img"></img>
-        <div class="user-profile-mini">
-          <img src="http://vueim-10073389.image.myqcloud.com//u/can/use/slash/sample1479377386" alt="">
-          <div class="user-profile-info">
-            <span>An</span>
-            <i>点击图片更换头像</i><input type="file" class="user-avatar-input">
-          </div>
-        </div>
-        
       </div>
       <div class="user-nickname">
         <span>An</span>

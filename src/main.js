@@ -12,6 +12,7 @@ import Talk from './components/talk'
 import Noconnect from './components/noconnect'
 import Noperson from './components/noperson'
 import Info from './components/info'
+import Confirm from './components/confirm'
 
 // 定义组件
 Vue.use(VueRouter)
@@ -20,6 +21,9 @@ var router = new VueRouter()
 router.map({
   '/': {
     component: Loginform
+  },
+  '/confirm': {
+    component: Confirm
   },
   '/user': {
     component: User,
