@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <form v-bind:action="url" method="post" enctype="multipart/form-data" id="uploadForm">
         <div class="user-profile-mini">
             <img class="profile-img" v-bind:src="fileSrc">
-            <input type="file" class="user-avatar-input" v-on:change="fileChange">
+            <input type="file" class="user-avatar-input" v-on:change="fileChange" name="FileContent">
             <div class="user-profile-info">
             </div>
         </div>
@@ -12,12 +12,11 @@
           <input v-model="psd_r"  class="user-input" type="password" placeholder="确认密码">
         </div>
         <div class="confirm-login-content">
-          <a  class="login"
+          <input type="submit"  class="login" 
               @click='login'>
-            登录
-          </a>
+          </input>
         </div>
-    </div>
+    </form>
 </template>
 <script>
 import { userLogin } from '../vuex/actions'
@@ -25,32 +24,40 @@ import vuex from 'vuex'
 export default {
   data: function(){
     return {
-        fileSrc: null
+        fileSrc: null,
+        user: '',
+        psd: '',
+        psd_r: '',
+        url: ''
     }
   },
   methods: {
-    login: function() {
+    login: function(e) {
+      // e.preventDefault()
       //1.匹配两次密码
-      //2.请求查重api，看用户名是否重复，重复返回ERROR，无重复返回状态OK
-      //3.判断返回状态，ERROR打印到客户端，OK则向服务器发起鉴权请求，返回签名
-      //4.拼接签名为tencent服务器请求url，发起请求，上传成功则返回可下载download_url
-      //5.将download_url放进user对象，向服务器发起addUser的post请求，按照返回结果渲染
+      //2.向服务器发起鉴权请求，返回签名
+      //3.拼接签名请求url，发起请求，上传成功则返回可下载download_url
+      //4.将download_url放进user对象，向服务器发起addUser的post请求，按照返回结果渲染
+      // if(this.psd !== this.psd_r) {
+      //   alert('两次密码不匹配，请重新输入')
+      // } else {
+      // }
       let user = {
         username: this.user,
         password: this.psd,
         password_r: this.psd_r
       }
-      this.$http.post(settings.server+'/login', user).then((res) => {
-        var result = res.body
-        var username = result.data.user.username
-        if(result.status === 'OK') {
-          this.userLogin(username)
-          CHAT.init(username)
-          this.$router.go('/user/userlist/noconnect')
-        } else {
-          alert(result.msg)
-        }
-      })
+      // this.$http.post(settings.server+'/login', user).then((res) => {
+      //   var result = res.body
+      //   var username = result.data.user.username
+      //   if(result.status === 'OK') {
+      //     this.userLogin(username)
+      //     CHAT.init(username)
+      //     this.$router.go('/user/userlist/noconnect')
+      //   } else {
+      //     alert(result.msg)
+      //   }
+      // })
     },
     fileChange: function() {
         var file = document.querySelector('.user-avatar-input')
@@ -80,6 +87,31 @@ export default {
         this.login()
       }
     }
+    this.$http.get('http://123.206.95.98:9002/node/').then((data) => {
+      let sign = data.body.sign
+      let url = data.body.url + '?sign=' + encodeURIComponent(sign);
+      this.url = url
+      var options = { 
+          type: 'post',
+          url: url,
+          dataType: 'json',
+          contentType:"multipart/form-data",
+          success:function(ret) { 
+              console.log('下载链接', ret.data.download_url)
+              console.log('url', ret.data.url)
+              // $('#downloadUrl').html(ret.data.download_url);
+              // $('#fileid').text(ret.data.fileid);
+              // $('#url').text(ret.data.url);
+              // $('#downloadRet').show();
+          },
+          error:function (ret) {
+              alert(ret.responseText);
+          }
+      }; 
+
+        // pass options to ajaxForm 
+        $('#uploadForm').ajaxForm(options)
+    })
   },
   vuex: {
     actions: {

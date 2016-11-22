@@ -13,7 +13,8 @@ import Noconnect from './components/noconnect'
 import Noperson from './components/noperson'
 import Info from './components/info'
 import Confirm from './components/confirm'
-
+import './public/js/jquery.form.min.js'
+import './public/js/jquery.min.js'
 // 定义组件
 Vue.use(VueRouter)
 Vue.use(VueResource)
