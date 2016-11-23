@@ -6,17 +6,19 @@
             <div class="user-profile-info">
             </div>
         </div>
+        <input type="submit" class="user-profile-btn" v-bind:value="submitStatus">
+    </form>
         <div class="confirm-input-content">
           <input v-model="user" class="user-input" type="text"  placeholder="请输入用户名">
           <input v-model="psd"  class="user-input" type="password" placeholder="请输入密码">
           <input v-model="psd_r"  class="user-input" type="password" placeholder="确认密码">
         </div>
         <div class="confirm-login-content">
-          <input type="submit"  class="login" 
-              @click='login'>
-          </input>
+          <a class="login" @click='login'>
+            注册
+          </a>
         </div>
-    </form>
+    
 </template>
 <script>
 import { userLogin } from '../vuex/actions'
@@ -28,36 +30,36 @@ export default {
         user: '',
         psd: '',
         psd_r: '',
-        url: ''
+        url: '',
+        submitStatus:'点击提交'
     }
   },
   methods: {
     login: function(e) {
-      // e.preventDefault()
       //1.匹配两次密码
       //2.向服务器发起鉴权请求，返回签名
       //3.拼接签名请求url，发起请求，上传成功则返回可下载download_url
       //4.将download_url放进user对象，向服务器发起addUser的post请求，按照返回结果渲染
-      // if(this.psd !== this.psd_r) {
-      //   alert('两次密码不匹配，请重新输入')
-      // } else {
-      // }
-      let user = {
-        username: this.user,
-        password: this.psd,
-        password_r: this.psd_r
+      if(this.psd !== this.psd_r ) {
+        alert('两次密码不匹配，请重新输入')
+      } else if(!download_url) {
+        alert('请上传头像')
+      } else {
+        let user = {
+          username: this.user,
+          password: this.psd,
+          password_r: this.psd_r,
+          url: this.download_url
+        }
+        this.$http.post(settings.server + '/addUser').then((res) => {
+          var result = res.body
+          if(result.status === 'OK') {
+            this.$router.go('/')
+          } else {
+            alert(result.msg)
+          }
+        })
       }
-      // this.$http.post(settings.server+'/login', user).then((res) => {
-      //   var result = res.body
-      //   var username = result.data.user.username
-      //   if(result.status === 'OK') {
-      //     this.userLogin(username)
-      //     CHAT.init(username)
-      //     this.$router.go('/user/userlist/noconnect')
-      //   } else {
-      //     alert(result.msg)
-      //   }
-      // })
     },
     fileChange: function() {
         var file = document.querySelector('.user-avatar-input')
@@ -96,19 +98,15 @@ export default {
           url: url,
           dataType: 'json',
           contentType:"multipart/form-data",
-          success:function(ret) { 
-              console.log('下载链接', ret.data.download_url)
-              console.log('url', ret.data.url)
-              // $('#downloadUrl').html(ret.data.download_url);
-              // $('#fileid').text(ret.data.fileid);
-              // $('#url').text(ret.data.url);
-              // $('#downloadRet').show();
+          success:(ret) => { 
+            this.download_url = ret.data.download_url
+            this.submitStatus = '提交成功'
+            $('.user-profile-btn').attr({'disabled':'disabled'}).css({'cursor':'none'})
           },
-          error:function (ret) {
-              alert(ret.responseText);
+          error:(ret) => {
+            console.log(ret.responseText)
           }
       }; 
-
         // pass options to ajaxForm 
         $('#uploadForm').ajaxForm(options)
     })
@@ -124,7 +122,7 @@ export default {
     .user-profile-mini {
         text-align: center;
         position: relative;
-        margin: 40px;
+        margin: 40px 0px 10px 0px;
         .profile-img {
             width: 150px;
             height: 150px;
@@ -139,6 +137,11 @@ export default {
             opacity: 0;
             cursor: pointer;
         }
+    }
+    .user-profile-btn {
+      display: block;
+      margin: 0 auto;
+      cursor: pointer;
     }
     .confirm-input-content {
         text-align: center;
