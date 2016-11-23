@@ -22,6 +22,7 @@
 </template>
 <script>
 import { userLogin } from '../vuex/actions'
+import settings from '../settings.js'
 import vuex from 'vuex'
 export default {
   data: function(){
@@ -31,27 +32,30 @@ export default {
         psd: '',
         psd_r: '',
         url: '',
+        download_url: null,
         submitStatus:'点击提交'
     }
   },
   methods: {
-    login: function(e) {
+    login: function() {
       //1.匹配两次密码
       //2.向服务器发起鉴权请求，返回签名
       //3.拼接签名请求url，发起请求，上传成功则返回可下载download_url
       //4.将download_url放进user对象，向服务器发起addUser的post请求，按照返回结果渲染
-      if(this.psd !== this.psd_r ) {
-        alert('两次密码不匹配，请重新输入')
-      } else if(!download_url) {
+      
+      if(this.psd !== this.psd_r || !this.psd || !this.psd_r || !this.user) {
+        alert('填写信息有误')
+      } else if(!this.download_url) {
         alert('请上传头像')
       } else {
-        let user = {
+        console.log(this.user)
+        var user = {
           username: this.user,
           password: this.psd,
           password_r: this.psd_r,
           url: this.download_url
         }
-        this.$http.post(settings.server + '/addUser').then((res) => {
+        this.$http.post(settings.server + '/addUser', user).then((res) => {
           var result = res.body
           if(result.status === 'OK') {
             this.$router.go('/')
