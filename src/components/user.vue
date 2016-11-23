@@ -2,10 +2,10 @@
   <div class="user-info">
     <div class="user-name">
       <div class="user-avatar">
-        <img src="http://vueim-10073389.image.myqcloud.com//u/can/use/slash/sample1479377386" class="img"></img>
+        <img v-bind:src='url' class="img"></img>
       </div>
       <div class="user-nickname">
-        <span>An</span>
+        <span>{{username}}</span>
         <i></i>
       </div>
     </div>
@@ -46,12 +46,29 @@
 </template>
 
 <script>
+import { getLoginId } from '../vuex/getters'
+import settings from '../settings.js'
   export default {
     data: function() {
       return {
+        url: '',
+        username: ''
       }
     },
     methods: {
+    },
+    ready: function() {
+      this.$http.post(settings.server+'/getUserInfo', { username: this.loginId }).then((res) => {
+        let result = res.data.data.user
+        this.url = result.url
+        console.log(result)
+        this.username = result.username
+      })
+    },
+    vuex: {
+      getters: {
+        loginId: getLoginId
+      }
     },
     
   }
