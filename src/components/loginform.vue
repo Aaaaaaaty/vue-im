@@ -13,6 +13,7 @@
         登录
       </a>
     </div>
+    <span class="app-confirm" @click='confirm'>注册</span>
   </div>
 </template>
 <script>
@@ -45,6 +46,9 @@ export default {
         }
       })
     },
+    confirm: function() {
+      this.$router.go('/confirm')
+    }
   },
   ready: function() {
     document.onkeydown = (e) => {
@@ -101,6 +105,14 @@ export default {
     margin: 0 auto;
     margin-top: 60px;
     margin-bottom: 20px;
+  }
+  .app-confirm {
+    display: block;
+    position: relative;
+    text-align: center;
+    font-size: 12px;
+    color: $red;
+    cursor: pointer;
   }
   
 </style>
