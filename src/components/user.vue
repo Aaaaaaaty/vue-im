@@ -6,12 +6,16 @@
       </div>
       <div class="user-nickname">
         <span>{{username}}</span>
-        <i></i>
+        <i @click="show = !show"></i>
+          <div v-if="show" class="user-add-user">
+            <span @click ="show_input =! show_input">添加好友</span>
+            <input type="text" v-if="show_input" placeholder="用户名"><p class="user-add-btn">添加</p>
+          </div>
       </div>
     </div>
     <div class="user-setting"></div>
     <div class="user-search">
-      <input type="text">
+      个性签名:{{userSign}}
     </div>
     <ul id="footer">
       <li class="footer-nav" 
@@ -44,7 +48,6 @@
   </div>
   <router-view keep-alive></router-view>
 </template>
-
 <script>
 import { getLoginId } from '../vuex/getters'
 import settings from '../settings.js'
@@ -52,7 +55,10 @@ import settings from '../settings.js'
     data: function() {
       return {
         url: '',
-        username: ''
+        username: '',
+        show: true,
+        show_input: true,
+        userSign: '我用双脚 成就你的梦想'
       }
     },
     methods: {
@@ -147,24 +153,45 @@ import settings from '../settings.js'
           display: inline-block;
           cursor: pointer;
         }
+        .user-add-user {
+          position: fixed;
+          width: 200px;
+          background-color: #eee;
+          border-radius: 5px;
+          z-index: 300;
+            span {
+              color: black;
+              font-size: 12px;
+              font-weight: 500;
+              padding: 4px 0px 0px 10px;
+              cursor: pointer;
+            }
+            input {
+              background-color: $white;
+              margin: 5px 0px 10px 10px;
+              border: 1px solid white;
+              border-radius: 5px;
+              padding: 5px;
+            }
+            .user-add-btn {
+              display: inline-block;
+              color: white;
+              font-size: 12px;
+              padding: 5px 8px;
+              margin-left: 5px; 
+              background-color: $right-red;
+              border-radius: 5px;
+            }
+        }
       }
     }
     .user-search {
+      height: 32px;
       width: 244px;
       background-color: $background-color;
       margin: 0 auto 6px;
-      input {
-        width: 214px;
-        height: 32px;
-        line-height: 32px;
-        border: 0;
-        border-radius: 2px;
-        -webkit-border-radius: 2px;
-        background-color: #26292E;
-        color: #fff;
-        padding-left: 30px;
-        font-size: 12px;
-      }  
+      color: $gray;
+      font-size: 12px; 
     }
     #footer {
       .footer-nav {
