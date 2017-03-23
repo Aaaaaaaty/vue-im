@@ -9,7 +9,8 @@
         <i @click="show = !show"></i>
           <div v-if="show" class="user-add-user">
             <span @click ="show_input =! show_input">添加好友</span>
-            <input type="text" v-if="show_input" placeholder="用户名"><p class="user-add-btn">添加</p>
+            <input type="text" v-if="show_input" placeholder="用户名" v-model="add_friend">
+            <p class="user-add-btn" v-if="show_input" @click="addFriend">添加</p>
           </div>
       </div>
     </div>
@@ -56,18 +57,64 @@ import settings from '../settings.js'
       return {
         url: '',
         username: '',
-        show: true,
-        show_input: true,
-        userSign: '我用双脚 成就你的梦想'
+        show: false,
+        show_input: false,
+        userSign: '我用双脚 成就你的梦想',
+        add_friend: ''
       }
     },
     methods: {
+      addFriend: function() {
+        this.$http.post(settings.server + '/getUserInfo', { username: this.add_friend }).then((res) => {
+          let result = res.data.data.user
+          let norepeatFriend = false
+          if(result.username !== this.loginId) {
+            if(result.friendslist.length) {
+              result.friendslist.map((obj, index) => {
+                if(obj.username == this.loginId) {
+                  norepeatFriend = true
+                  alert('已有该好友',norepeatFriend)
+                }
+              })
+            }
+            if(!norepeatFriend) {
+              this.show = false
+              console.log('result.url', result.url)
+              result.friendslist.push({
+                username: this.loginId,
+                url: result.url
+              })
+              let new_user = {
+                _id: result._id,
+                friendslist: result.friendslist
+              }
+              this.$http.post(settings.server + '/updateUser', new_user).then((res) => {
+                let result = res.data
+              })
+              this.$http.post(settings.server + '/getUserInfo', { username: this.loginId }).then((res) => {
+                let login_result = res.data.data.user
+                console.log('login_result.url',login_result.url)
+                login_result.friendslist.push({
+                  username: this.add_friend,
+                  url: login_result.url
+                })
+                let new_login = {
+                  _id: login_result._id,
+                  friendslist: login_result.friendslist
+                }
+                this.$http.post(settings.server + '/updateUser', new_login).then((res) => {
+                  let result = res.data
+                })
+              })
+            }
+          }
+        })
+      }
     },
     ready: function() {
-      this.$http.post(settings.server+'/getUserInfo', { username: this.loginId }).then((res) => {
+      this.$http.post(settings.server + '/getUserInfo', { username: this.loginId }).then((res) => {
         let result = res.data.data.user
         this.url = result.url
-        console.log(result)
         this.username = result.username
       })
     },

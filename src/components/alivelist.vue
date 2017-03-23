@@ -4,7 +4,7 @@
       <div track-by="$index" v-for="alive in aliveList" @click="startTalk">
         <div v-if="alive.type == 'person'" class="alive-item">
           <div  class="alive-name">
-            <div class="alive-img"></div>
+            <img v-bind:src="alive.url" class="alive-img">
               {{alive.username}}
           </div>
         </div>
@@ -23,7 +23,8 @@ import pinyin from 'pinyin'
   export default {
     data: function() {
       return {
-        aliveList: []
+        aliveList: [],
+        url:'',
       }
     },
     methods: {
@@ -36,22 +37,28 @@ import pinyin from 'pinyin'
         })
       },
     },
+    created: function() {
+      
+    },
     ready: function() { 
-      this.$http.post(settings.server+'/getUser', { username: this.loginId }).then((res) => {
+      this.$http.post(settings.server+'/getUserList', { username: this.loginId }).then((res) => {
         var friendslist = res.body.data.user
         //quickSort为快速排序
-        var quickSort = function(arr) {
-          if (arr.length <= 1) { return arr; }
-          var pivotIndex = Math.floor(arr.length / 2)
-          var pivot = arr.splice(pivotIndex, 1)[0]
+        var quickSort = (arr) => {
+          var _arr = arr.map((item, index) => {
+            return item
+          })
+          if (_arr.length <= 1) { return _arr; }
+          var pivotIndex = Math.floor(_arr.length / 2)
+          var pivot = _arr.splice(pivotIndex, 1)[0]
           var left = []
           var right = []
-          for (var i = 0; i < arr.length; i++){
-          if (pinyin(arr[i].username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toLowerCase() <= pinyin(pivot.username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toLowerCase()) {
-            left.push(arr[i])
-          } else {
-            right.push(arr[i])
-          }
+          for (var i = 0; i < _arr.length; i++){
+            if (pinyin(_arr[i].username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toLowerCase() <= pinyin(pivot.username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toLowerCase()) {
+              left.push(_arr[i])
+            } else {
+              right.push(_arr[i])
+            }
         }
           return quickSort(left).concat([pivot], quickSort(right))
         }
@@ -77,6 +84,7 @@ import pinyin from 'pinyin'
           return addedList
         }
         this.aliveList = addSymList(quickSort(friendslist))
+        console.log('this.aliveList', this.aliveList)
       })
     },
     router:{
@@ -118,7 +126,7 @@ import pinyin from 'pinyin'
           position: relative;
           width: 40px;
           height: 40px;
-          background-color: $gray;
+          // background-color: $gray;
         }
         .alive-name {
           overflow: hidden;
