@@ -60,7 +60,7 @@ import pinyin from 'pinyin'
           return quickSort(left).concat([pivot], quickSort(right))
         }
         var addSymList = function(arr) { //添加字母分隔符
-          var findSym = 'A'
+          var findSym = pinyin(arr[0].username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toUpperCase()
           var status = false
           var addedList = []
           arr.map((item, index) => {
