@@ -66,7 +66,8 @@ export default {
       var user = {
         time: time,
         lastMsg: this.msg,
-        username: this.$route.query.username
+        username: this.$route.query.username,
+        url: this.$route.query.url
       }
       this.addUserList(user)
       this.msg = ''

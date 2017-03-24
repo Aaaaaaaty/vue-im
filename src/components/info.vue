@@ -43,7 +43,7 @@ export default {
       this.$router.go({
           path: '/user/userlist/talk/',
           query: {
-                  username: this.$route.query.username，
+                  username: this.$route.query.username,
                   url: this.$route.query.url
                 }
       })
