@@ -37,9 +37,6 @@ import pinyin from 'pinyin'
         })
       },
     },
-    created: function() {
-      
-    },
     ready: function() { 
       this.$http.post(settings.server+'/getUserList', { username: this.loginId }).then((res) => {
         var friendslist = res.body.data.user
