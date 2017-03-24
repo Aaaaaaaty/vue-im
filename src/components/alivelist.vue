@@ -67,10 +67,12 @@ import pinyin from 'pinyin'
             if(pinyin(item.username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toUpperCase() == findSym) {
               if(!status) {
                 addedList.push(findSym)
+                console.log('item', item.url, index)
                 addedList.push(item)
                 status = true
               } else {
                 addedList.push(item)
+                console.log('item', item.url, index)
               }
             } else {
               findSym = pinyin(item.username, {style: pinyin.STYLE_NORMAL})[0][0].charAt(0).toUpperCase()

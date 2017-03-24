@@ -79,24 +79,24 @@ import settings from '../settings.js'
             }
             if(!norepeatFriend) {
               this.show = false
-              console.log('result.url', result.url)
-              result.friendslist.push({
-                username: this.loginId,
-                url: result.url
-              })
-              let new_user = {
-                _id: result._id,
-                friendslist: result.friendslist
-              }
-              this.$http.post(settings.server + '/updateUser', new_user).then((res) => {
-                let result = res.data
-              })
               this.$http.post(settings.server + '/getUserInfo', { username: this.loginId }).then((res) => {
                 let login_result = res.data.data.user
-                console.log('login_result.url',login_result.url)
+
+                result.friendslist.push({
+                  username: this.loginId,
+                  url: login_result.url
+                })
+                let new_user = {
+                  _id: result._id,
+                  friendslist: result.friendslist
+                }
+                this.$http.post(settings.server + '/updateUser', new_user).then((res) => {
+                  let result = res.data
+                })
+
                 login_result.friendslist.push({
                   username: this.add_friend,
-                  url: login_result.url
+                  url: result.url
                 })
                 let new_login = {
                   _id: login_result._id,
