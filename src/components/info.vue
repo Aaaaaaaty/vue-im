@@ -8,12 +8,12 @@
       </div>
       <div class="content">
         <div class="avatar">
-          <div></div>    
+          <img v-bind:src="$route.query.url"></img>    
         </div>
         <div class="profile-name">
           <h4>{{$route.query.username}}</h4>
         </div>
-        <p class="profile-text">控制自己，掌控别人</p>
+        <p class="profile-text"></p>
         <div class="profile-meta"></div>
         <div class="profile-submit">
           <a class="button" @click="submit">发消息</a>
@@ -36,12 +36,16 @@ export default {
       var user = {
         time: '',
         lastMsg: '',
-        username: this.$route.query.username
+        username: this.$route.query.username,
+        url: this.$route.query.url
       }
       this.addUserList(user)
       this.$router.go({
           path: '/user/userlist/talk/',
-          query: {username: this.$route.query.username}
+          query: {
+                  username: this.$route.query.username，
+                  url: this.$route.query.url
+                }
       })
     },
   },
@@ -99,7 +103,7 @@ export default {
         font-size: 13px;
         .avatar {
           margin-bottom: 20px;
-          div {
+          img {
             display: block;
             width: 100px;
             height: 100px;

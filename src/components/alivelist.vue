@@ -31,9 +31,14 @@ import pinyin from 'pinyin'
       startTalk: function(e) {
         var text = e.currentTarget
         var userName = text.querySelector('.alive-name').innerText
+        var url = text.querySelector('.alive-img').getAttribute('src')
+        console.log(url)
         this.$router.go({
           path: '/user/alivelist/info',
-          query: { username: userName }
+          query: { 
+            username: userName,
+            url: url
+          }
         })
       },
     },

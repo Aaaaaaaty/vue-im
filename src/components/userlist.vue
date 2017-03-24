@@ -6,7 +6,7 @@
             v-for="user in userList" 
             @click="startTalk"
             >
-        <div class="user-img"></div>
+        <img class="user-img" v-bind:src="user.url"></img>
         <div class="user-name">
           <span class="user-user">{{user.username}}</span>
           <p class="user-ext">{{user.time}}</p>
@@ -84,7 +84,7 @@ import CHAT from '../client'
           position: relative;
           width: 40px;
           height: 40px;
-          background-color: $gray;
+          // background-color: $gray;
         }
         .user-name {
           overflow: hidden;

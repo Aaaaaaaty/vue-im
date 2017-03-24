@@ -19,6 +19,7 @@ const mutations = {
   addUserList(state, _user) {
     var status = false
     state.userList.map((item, index) => {
+      console.log('item', item)
       if(item.username == _user.username) {
         item = _user
         status = true
