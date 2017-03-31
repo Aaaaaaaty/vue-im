@@ -33,3 +33,5 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 	通讯录
 	聊天记录
 	在网页适配好后用electron进行打包成桌面应用
+
+mongodb: sudo mongod --dbpath=/data/db --port=27017
