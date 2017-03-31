@@ -16,6 +16,7 @@
               <div class="talk-word talk-word-self">{{msgObj.msg}}</div><i class="swip"></i>
             </div>
           </div>
+          <div v-else></div>
           <div  class="talk-space user-talk" 
                 v-if="CHAT.msgArr[$index].toUser == username && CHAT.msgArr[$index].fromUser == $route.query.username"
                 track-by="$index">

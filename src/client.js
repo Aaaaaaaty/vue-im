@@ -75,6 +75,8 @@ const CHAT={
       this.socket.on('to' + username, function(obj) {
         i++
         CHAT.msgArr.push(obj)
+        console.log(CHAT.msgArr[0].toUser)
+        console.log(CHAT.msgArr[0].fromUser)
       })    
   },
   init:function(username){
