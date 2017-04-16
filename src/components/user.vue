@@ -23,13 +23,19 @@
           id="alivelist" 
           v-link="{path: '/user/userlist/noconnect', activeClass: 'active'}" 
           >
-        <i class="iconfont" >&#xe600</i>
+        <i class="iconfont" >&#xe740</i>
       </li>
       <li class="footer-nav" 
           id="userlist" 
           v-link="{path: '/user/alivelist/noperson', activeClass: 'active'}"
           >
         <i class="iconfont" id="alivelist" >&#xe603</i>
+      </li>
+      <li class="footer-nav" 
+          id="userlist" ß
+          v-link="{path: '/user/userlist/talk', activeClass: 'active', query: {username: '群聊'}}"
+          >
+        <i class="iconfont" id="alivelist" >&#xe62a</i>
       </li>
     </ul>
   </div>

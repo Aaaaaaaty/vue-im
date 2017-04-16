@@ -57,6 +57,7 @@ export default {
   },
   methods: {
     submit: function(){
+      $('.content')[0].scrollTop = 900000000
       var date = new Date()
       var time = date.getHours() + ':' + date.getMinutes()
       var obj = {
@@ -74,7 +75,6 @@ export default {
       this.addUserList(user)
       this.msg = ''
       CHAT.submit(obj)
-      CHAT.scrollToBottom()
     },
   },
   ready: function() {
@@ -126,6 +126,7 @@ export default {
         top: 51px;
         right: 0;
         left: 0;
+        overflow: scroll;
       }
       .talker {
         background-color: #eee;
