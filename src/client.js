@@ -12,7 +12,6 @@ const CHAT={
   lock:{},
   //让浏览器滚动条保持在最低部
   scrollToBottom:function(){
-    console.log(1)
     window.scrollTo(0, 900000);
   },
   //退出，本例只是一个简单的刷新
@@ -75,8 +74,7 @@ const CHAT={
       this.socket.on('to' + username, function(obj) {
         i++
         CHAT.msgArr.push(obj)
-        console.log(CHAT.msgArr[0].toUser)
-        console.log(CHAT.msgArr[0].fromUser)
+        console.log(obj.msg)
       })    
   },
   init:function(username){

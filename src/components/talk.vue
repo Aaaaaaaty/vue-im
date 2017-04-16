@@ -24,6 +24,7 @@
               <div class="talk-word talk-word-user">{{msgObj.msg}}<i class="swip-user"></i></div>
             </div>
           </div>
+          <div v-else></div>
         </div>
       </div>
       <div class="talker">

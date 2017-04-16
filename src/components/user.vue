@@ -31,20 +31,6 @@
           >
         <i class="iconfont" id="alivelist" >&#xe603</i>
       </li>
-      <!--
-      <li class="footer-nav" 
-          id="new" 
-          v-link="{path: '/user/new', activeClass: 'active'}"
-          >
-        <i class="iconfont" id="xe602">&#xe602</i>
-      </li>
-      <li class="footer-nav" 
-          id="account" 
-          v-link="{path: '/user/account', activeClass: 'active'}"
-          >
-        <i class="iconfont" >&#xe601</i>
-      </li>
-      --> 
     </ul>
   </div>
   <router-view keep-alive></router-view>
