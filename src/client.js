@@ -69,12 +69,10 @@ const CHAT={
     return new Date().getTime()+""+Math.floor(Math.random()*899+100);
   },
   message: function(username) {
-      console.log('waiting..')
-      var i = 0
+    console.log('message')
       this.socket.on('to' + username, function(obj) {
-        i++
         CHAT.msgArr.push(obj)
-        console.log('CHAT.msgArr', CHAT.msgArr)
+        console.log('CHAT.msgArr', obj)
       })    
   },
   init:function(username){

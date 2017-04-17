@@ -13,15 +13,19 @@
                 v-if="CHAT.msgArr[$index].fromUser == username && CHAT.msgArr[$index].toUser == $route.query.username" 
                 track-by="$index">
             <div class="talk-content">
-              <div class="talk-word talk-word-self">{{msgObj.msg}}</div><i class="swip"></i>
+              <div class="talk-word talk-word-self">{{ msgObj.msg }}</div><i class="swip"></i>
             </div>
           </div>
           <div v-else></div>
           <div  class="talk-space user-talk" 
-                v-if="CHAT.msgArr[$index].toUser == username && CHAT.msgArr[$index].fromUser == $route.query.username"
+                v-if="CHAT.msgArr[$index].toUser == username && CHAT.msgArr[$index].fromUser == $route.query.username" 
                 track-by="$index">
             <div class="talk-content">
-              <div class="talk-word talk-word-user">{{msgObj.msg}}<i class="swip-user"></i></div>
+              <div v-if="CHAT.msgArr[$index].fromUser =='群聊'" class="talk-all">{{ msgObj.trueFrom }}</div>
+              <div class="talk-word talk-word-user">
+                {{ msgObj.msg }}
+                <i class="swip-user"></i>
+              </div>
             </div>
           </div>
           <div v-else></div>
@@ -78,6 +82,7 @@ export default {
     },
   },
   ready: function() {
+    CHAT.message(this.loginId)
     this.username = this.loginId
   },
   vuex: {
@@ -94,10 +99,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
   @import '../utils/utils.scss';
+  .talk-all {
+    float: left;
+  }
   .talk-contents {
     height: 100%;
     margin-left: 280px;
-    
     .talk-inner {
       .talk-nav {
         background-color: $gray-bg;
