@@ -8,9 +8,10 @@
         <span>{{username}}</span>
         <i @click="show = !show"></i>
           <div v-if="show" class="user-add-user">
-            <span @click ="show_input =! show_input">添加好友</span>
+            <span @click ="show_input =! show_input">好友管理</span>
             <input type="text" v-if="show_input" placeholder="用户名" v-model="add_friend">
             <p class="user-add-btn" v-if="show_input" @click="addFriend">添加</p>
+            <p class="user-add-btn" v-if="show_input" @click="deleteFriend">删除</p>
           </div>
       </div>
     </div>
@@ -33,7 +34,7 @@
       </li>
       <li class="footer-nav" 
           id="userlist" ß
-          v-link="{path: '/user/userlist/talk', activeClass: 'active', query: {username: '群聊'}}"
+          v-link="{path: '/user/userlist/talk/', activeClass: 'active', query: {username: '群聊'}}"
           >
         <i class="iconfont" id="alivelist" >&#xe62a</i>
       </li>
@@ -84,6 +85,11 @@ import settings from '../settings.js'
                 }
                 this.$http.post(settings.server + '/updateUser', new_user).then((res) => {
                   let result = res.data
+                   if(result.status === 'OK') {
+                      alert('添加成功！')
+                    } else {
+                      alert('出错了。')
+                    }
                 })
 
                 login_result.friendslist.push({
@@ -101,7 +107,48 @@ import settings from '../settings.js'
             }
           }
         })
-      }
+      },
+      deleteFriend: function() {
+      this.$http.post(settings.server + '/getUserInfo', { username: this.add_friend }).then((res) => {
+          let result = res.data.data.user
+          this.show = false
+          this.$http.post(settings.server + '/getUserInfo', { username: this.loginId }).then((res) => {
+            let login_result = res.data.data.user
+            let result_friendsList = []
+            result.friendslist.forEach((item, index) => {
+              if( item.username !== this.loginId ) {
+                result_friendsList.push(item)
+              } 
+            })
+            let new_user = {
+              _id: result._id,
+              friendslist: result_friendsList
+            }
+            this.$http.post(settings.server + '/updateUser', new_user).then((res) => {
+              let result = res.data
+              if(result.status === 'OK') {
+                alert('删除成功！')
+              } else {
+                alert('出错了。')
+              }
+            })
+            let login_result_friendsList = []
+            login_result.friendslist.forEach((item, index) => {
+              if( item.username !== this.add_friend ) {
+                login_result_friendsList.push(item)
+              }
+            })
+            let new_login = {
+              _id: login_result._id,
+              friendslist: login_result_friendsList
+            }
+            this.$http.post(settings.server + '/updateUser', new_login).then((res) => {
+              let result = res.data
+              console.log('result', result)
+            })
+          })
+      })
+    },
     },
     ready: function() {
       this.$http.post(settings.server + '/getUserInfo', { username: this.loginId }).then((res) => {
@@ -211,6 +258,7 @@ import settings from '../settings.js'
               border: 1px solid white;
               border-radius: 5px;
               padding: 5px;
+              width: 76px;
             }
             .user-add-btn {
               display: inline-block;
