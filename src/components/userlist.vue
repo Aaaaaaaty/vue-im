@@ -40,6 +40,7 @@ import CHAT from '../client'
       },
     },
     ready: function() { 
+      console.log('CHAT.msgArr', CHAT.msgArr)
       this.userList = this.addUserList
     },
     router:{
