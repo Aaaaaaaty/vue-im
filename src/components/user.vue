@@ -74,7 +74,6 @@ import settings from '../settings.js'
               this.show = false
               this.$http.post(settings.server + '/getUserInfo', { username: this.loginId }).then((res) => {
                 let login_result = res.data.data.user
-
                 result.friendslist.push({
                   username: this.loginId,
                   url: login_result.url
@@ -91,7 +90,6 @@ import settings from '../settings.js'
                       alert('出错了。')
                     }
                 })
-
                 login_result.friendslist.push({
                   username: this.add_friend,
                   url: result.url
