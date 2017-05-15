@@ -1,0 +1,137 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.s  
+ */
+
+var app = require('../app')
+var debug = require('debug')('vue-im-server:server')
+var http = require('http')
+var port = normalizePort(process.env.PORT || '3000')
+app.set('port', port)
+var server = http.createServer(app)
+var io = require('socket.io')(server)
+var onlineUsers = {} //在线用户
+var onlineCount = 0  //在线用户人数
+var lock = {}
+var user = ''
+io.on('connection', function(socket){
+  var toUser = {}
+  var fromUser = {}
+  var msg = ''
+  socket.emit('open')
+  socket.on('addUser', function(username) {
+    if(!onlineUsers.hasOwnProperty(username)) {
+        onlineUsers[username] = socket
+        onlineCount = onlineCount + 1
+    }
+    user = username
+    console.log(onlineUsers[username].id) //建立连接后 用户点击不同通讯录都是建立同样的socket对象
+    console.log('在线人数：',onlineCount)
+      socket.on('sendMsg', function(obj) {
+        toUser = obj.toUser
+        fromUser = obj.fromUser
+        msg = obj.msg
+        time = obj.time
+        if (toUser == '群聊') {
+          for (user in onlineUsers) {
+            obj.fromUser = '群聊'
+            obj.toUser = user
+            obj.trueFrom = fromUser
+            if( user != fromUser ) { //接收方
+              onlineUsers[user].emit('to' + user, obj)
+            } else { //发送方
+              obj.toUser = '群聊'
+              obj.fromUser = user
+              onlineUsers[fromUser].emit('to' + fromUser, obj)
+            }
+          }
+        } 
+        else if(toUser in onlineUsers) {
+          console.log(1)
+          onlineUsers[toUser].emit('to' + toUser, obj)
+          onlineUsers[fromUser].emit('to' + fromUser, obj)
+        } else {
+          console.log(toUser + '不在线')
+          // console.log('socket.id', socket.id)
+          onlineUsers[fromUser].emit('to' + fromUser, obj)
+        }
+        
+        
+      })
+    socket.on("disconnect", function () {
+      console.log("客户端断开连接.")
+      //遇到的坑 每次都要删除该socket连接 否则断开重连还是这个socket但是client端socket已经改变
+      delete onlineUsers[fromUser] 
+    })
+  })
+  
+  
+})
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port)
+server.on('error', onError)
+server.on('listening', onListening)
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10)
+
+  if (isNaN(port)) {
+    // named pipe
+    return val
+  }
+
+  if (port >= 0) {
+    // port number
+    return port
+  }
+
+  return false
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges')
+      process.exit(1)
+      break
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use')
+      process.exit(1)
+      break
+    default:
+      throw error
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address()
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port
+  debug('Listening on ' + bind)
+}
