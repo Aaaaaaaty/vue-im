@@ -47,3 +47,5 @@ sudo mongod --dbpath=/data/db --port=27017
 ![image.png](http://upload-images.jianshu.io/upload_images/2094574-e75feb207ab8fbb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![image.png](http://upload-images.jianshu.io/upload_images/2094574-8e9927974ce68aaa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![image.png](http://upload-images.jianshu.io/upload_images/2094574-56f24c2095c96bb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](http://upload-images.jianshu.io/upload_images/2094574-7579bf0c640ce243.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](http://upload-images.jianshu.io/upload_images/2094574-832171969e76d8a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
