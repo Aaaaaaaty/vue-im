@@ -1,6 +1,4 @@
-## Github
- https://github.com/Aaaaaaaty/vue-im     
- https://github.com/Aaaaaaaty/vue-im-server
+
 
 ## Download
 ```
