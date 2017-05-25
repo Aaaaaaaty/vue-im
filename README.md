@@ -12,6 +12,8 @@ npm install
 ### Server
 ```
 npm install -g nodemon //instead of 'node' to run your code
+cd ./server/
+npm install
 ```
 ### Database
 ```
